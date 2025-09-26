@@ -1,41 +1,80 @@
-
-
 .home {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #f4f7fb;
   text-align: center;
+
+  // Galaxy gradient base
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+
+  // Little twinkling stars
+ &::before,
+&::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent
+    url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+  background-size: auto; // keeps texture repeating
+  animation: moveStars 100s linear infinite;
+  opacity: 0.8;
 }
+
+
+  &::after {
+    animation: moveStars 200s linear infinite reverse;
+    opacity: 0.4;
+  }
+}
+
+// Star movement animation
+@keyframes moveStars {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -1000px;
+  }
+}
+
 
 .header {
   max-width: 600px;
+  z-index: 1; // keeps text above stars
 }
 
 h1 {
   font-size: 2.5rem;
   margin-bottom: 0.5rem;
-  color: #333;
+  color: #ffffff; // brighter for galaxy contrast
 }
 
 p {
   font-size: 1.2rem;
   margin-bottom: 1.5rem;
-  color: #555;
+  color: #d1d1d1;
 }
 
 .ctaButton {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  background: #0070f3;
+  font-size: 3.5rem;
+  background: transparent;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
-    background: #0059c1;
+    transform: scale(1.1);
+    text-shadow: 0 0 15px #fff, 0 0 30px #0ff, 0 0 45px #0ff;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }

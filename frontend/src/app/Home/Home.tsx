@@ -5,12 +5,12 @@ const Home = () => {
   return (
     <div className={styles.home}>
       <header className={styles.header}>
-        <h1>Welcome to MyPortfolio</h1>
-        <p>Your one-stop place to showcase projects and skills 🚀</p>
+        <h1>Welcome to My Portfolio</h1>
+        <p>Programming is like planting ideas into a machine, if you nurture them with logic and patience, they grow into solutions.</p>
         
         {/* Button navigates to /about */}
-        <Link to="/about">
-          <button className={styles.ctaButton}>Get Started</button>
+        <Link to="/globe">
+          <button className={styles.ctaButton}>˙⋆🌟⋆˙</button>
         </Link>
       </header>
     </div>
