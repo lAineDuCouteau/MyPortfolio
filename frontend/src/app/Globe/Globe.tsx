@@ -4,6 +4,9 @@ import { OrbitControls, Html } from "@react-three/drei";
 import styles from "./Globe.module.scss";
 import * as THREE from "three";
 import { useNavigate } from "react-router-dom";
+import { Text } from "@react-three/drei";
+
+
 
 // Convert lat/lon to 3D position
 const latLongToVector3 = (lat: number, lon: number, radius: number) => {
@@ -23,7 +26,7 @@ const ContinentButton = ({ lat, lon, label }: { lat: number; lon: number; label:
     else if (label === "About Me") navigate("/about");
   };
 
-  const position = latLongToVector3(lat, lon, 1.98);
+  const position = latLongToVector3(lat, lon, 1.96);
   const direction = new THREE.Vector3(...position).normalize();
   const quaternion = new THREE.Quaternion().setFromUnitVectors(
     new THREE.Vector3(0, 1, 0),
@@ -31,12 +34,22 @@ const ContinentButton = ({ lat, lon, label }: { lat: number; lon: number; label:
   );
 
   return (
-    <mesh position={position} quaternion={quaternion} scale={0.1} onClick={handleClick}>
-      <cylinderGeometry args={[5, 5, 1, 6]} />
+     <mesh position={position} quaternion={quaternion} scale={0.1} onClick={handleClick} onPointerOver={() => (document.body.style.cursor = "pointer")}
+      onPointerOut={() => (document.body.style.cursor = "default")}>
+      <cylinderGeometry args={[5, 6, 1, 6]} />
       <meshStandardMaterial color="gray" />
-      <Html distanceFactor={10}>
-        <div style={{ color: "white", fontSize: "12px", textAlign: "center" }}>{label}</div>
-      </Html>
+      
+      {/* 3D Text flat on top of the button */}
+      <Text
+        position={[0, 0.6, 0]}   // slightly above the cylinder
+        rotation={[Math.PI / -2, 0, 0]} // make it flat on the top face
+        fontSize={1}               // adjust size to fit the button
+        color="white"
+        anchorX="center"
+        anchorY="middle"
+      >
+        {label}
+      </Text>
     </mesh>
   );
 };
@@ -96,7 +109,11 @@ const Globe = () => {
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} />
         <RotatingGlobe buttonPositions={buttonPositions} labels={labels} />
-        <OrbitControls enableZoom={true} />
+<OrbitControls 
+  enableZoom={false} 
+  minPolarAngle={0} 
+  maxPolarAngle={Math.PI} 
+/>
       </Canvas>
     </div>
   );
