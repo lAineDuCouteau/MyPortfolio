@@ -10,8 +10,8 @@ const Globe = () => {
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} />
 
-        <Sphere args={[2, 64, 64]} scale={1.5}>
-          <meshStandardMaterial color="purple" />
+        <Sphere args={[2, 64, 64]} scale={1.3}>
+          <meshStandardMaterial color="lightblue" />
         </Sphere>
 
         <OrbitControls enableZoom={true} />
