@@ -36,14 +36,14 @@ const ContinentButton = ({ lat, lon, label }: { lat: number; lon: number; label:
   return (
      <mesh position={position} quaternion={quaternion} scale={0.1} onClick={handleClick} onPointerOver={() => (document.body.style.cursor = "pointer")}
       onPointerOut={() => (document.body.style.cursor = "default")}>
-      <cylinderGeometry args={[5, 6, 1, 6]} />
+      <cylinderGeometry args={[6, 7, 1, 6]} />
       <meshStandardMaterial color="gray" />
       
       {/* 3D Text flat on top of the button */}
       <Text
         position={[0, 0.6, 0]}   // slightly above the cylinder
         rotation={[Math.PI / -2, 0, 0]} // make it flat on the top face
-        fontSize={1}               // adjust size to fit the button
+        fontSize={1.5}               // adjust size to fit the button
         color="white"
         anchorX="center"
         anchorY="middle"
@@ -85,8 +85,8 @@ const Globe = () => {
     [30, 30],
     [-30, 60],
     [45, -45],
-    [-95, -90],
-    [-10, -10],
+    [-95, -55],
+    [-20, -40],
     [15, 120],
     [-15, -120],
     [140, 30],
@@ -94,12 +94,12 @@ const Globe = () => {
 
   const labels = [
     "Home",
-    "About Me",
+    "Foods",
     "Projects",
     "Contact",
     "Hobbies",
     "Music",
-    "Foods",
+    "About Me",
     "Experience",
   ];
 
