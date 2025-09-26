@@ -26,7 +26,7 @@ const ContinentButton = ({ lat, lon, label }: { lat: number; lon: number; label:
     else if (label === "About Me") navigate("/about");
   };
 
-  const position = latLongToVector3(lat, lon, 1.96);
+  const position = latLongToVector3(lat, lon, 1.95);
   const direction = new THREE.Vector3(...position).normalize();
   const quaternion = new THREE.Quaternion().setFromUnitVectors(
     new THREE.Vector3(0, 1, 0),
@@ -36,7 +36,7 @@ const ContinentButton = ({ lat, lon, label }: { lat: number; lon: number; label:
   return (
      <mesh position={position} quaternion={quaternion} scale={0.1} onClick={handleClick} onPointerOver={() => (document.body.style.cursor = "pointer")}
       onPointerOut={() => (document.body.style.cursor = "default")}>
-      <cylinderGeometry args={[6, 7, 1, 6]} />
+      <cylinderGeometry args={[6, 7, 1, 7]} />
       <meshStandardMaterial color="gray" />
       
       {/* 3D Text flat on top of the button */}
