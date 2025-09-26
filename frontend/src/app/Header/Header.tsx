@@ -10,6 +10,7 @@ const Header = () => {
 
       <nav className={styles.nav}>
         <Link to="/">Home</Link>
+        <Link to="/globe">Globe</Link>
         <Link to="/about">About Me</Link>
         <Link to="/projects">Projects</Link>
         <Link to="/contact">Contact</Link>
