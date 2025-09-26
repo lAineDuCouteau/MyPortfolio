@@ -1,0 +1,43 @@
+
+.about {
+  padding: 4rem 2rem;
+  background: #fff;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+.text {
+  flex: 2;
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.image {
+  flex: 1;
+
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0070f3;
+  }
+}
