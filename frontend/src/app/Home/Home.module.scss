@@ -2,29 +2,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   text-align: center;
-
-  // Galaxy gradient base
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   overflow: hidden;
+  position: relative;
 
-  // Little twinkling stars
- &::before,
-&::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent
-    url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
-  background-size: auto; // keeps texture repeating
-  animation: moveStars 100s linear infinite;
-  opacity: 0.8;
-}
-
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent
+      url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+    background-size: auto;
+    animation: moveStars 100s linear infinite;
+    opacity: 0.8;
+  }
 
   &::after {
     animation: moveStars 200s linear infinite reverse;
@@ -32,7 +30,6 @@
   }
 }
 
-// Star movement animation
 @keyframes moveStars {
   from {
     background-position: 0 0;
@@ -42,22 +39,46 @@
   }
 }
 
-
 .header {
-  max-width: 600px;
-  z-index: 1; // keeps text above stars
+  max-width: 1000px;
+  z-index: 1;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.greetingContainer {
+  height: 3rem; // fixed height to prevent shifting
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.greeting {
+  font-size: 5rem;
+  font-weight: bold;
+  text-align: center;
+  transition: opacity 0.5s ease;
+  margin-bottom: 100px;
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: #ffffff; // brighter for galaxy contrast
+  font-size: 4.5rem;
+  margin-bottom: 1rem;
 }
 
 p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
   color: #d1d1d1;
+}
+
+.subText {
+  font-size: 1.2rem;
+  color: #a0a0a0;
+  margin-bottom: 3rem;
 }
 
 .ctaButton {
@@ -77,4 +98,11 @@ p {
   &:active {
     transform: scale(0.95);
   }
+}
+
+.footer {
+  position: absolute;
+  bottom: 20px;
+  font-size: 0.9rem;
+  color: #777;
 }
