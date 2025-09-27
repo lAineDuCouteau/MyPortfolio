@@ -36,7 +36,7 @@ const ContinentButton = ({ lat, lon, label }: { lat: number; lon: number; label:
   return (
      <mesh position={position} quaternion={quaternion} scale={0.1} onClick={handleClick} onPointerOver={() => (document.body.style.cursor = "pointer")}
       onPointerOut={() => (document.body.style.cursor = "default")}>
-      <cylinderGeometry args={[6, 7, 1.5, 7]} />
+      <cylinderGeometry args={[6, 7, 1.5, 5]} />
       <meshStandardMaterial color="gray" />
       
       {/* 3D Text flat on top of the button */}
