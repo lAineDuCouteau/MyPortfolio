@@ -68,14 +68,14 @@ const RotatingGlobe = ({ buttonPositions, labels, onButtonClick, zoomingOut }: a
 
     // intro zoom-in (scale up)
     if (progress < 1 && !zoomingOut) {
-      setProgress((p) => Math.min(1, p + delta * 1));
+      setProgress((p) => Math.min(1, p + delta * 1.4));
       const s = THREE.MathUtils.lerp(1.5, 2, progress);
       groupRef.current.scale.set(s, s, s);
     }
 
     // zoom out on click (scale down)
     if (zoomingOut && groupRef.current.scale.x > 0) {
-      const s = Math.max(0, groupRef.current.scale.x - delta * 0.5);
+      const s = Math.max(0, groupRef.current.scale.x - delta * 1.5);
       groupRef.current.scale.set(s, s, s);
     }
 
