@@ -1,22 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Home.module.scss";
 import { Link } from "react-router-dom";
 
-const greetings = [
-  "Hello",        // English
-  "Hola",         // Spanish
-  "Bonjour",      // French
-  "Ciao",         // Italian
-  "こんにちは",     // Japanese
-  "안녕하세요",      // Korean
-  "مرحبا",        // Arabic
-  "Olá",          // Portuguese
-  "Hallo",        // German
-  "Привет",       // Russian
-];
+const greetings = ["Hello", "Hola", "Bonjour", "Ciao", "こんにちは", "안녕하세요", "مرحبا", "Olá", "Hallo", "Привет"];
 
 const Home = () => {
   const [greetingIndex, setGreetingIndex] = useState(0);
+  const [velvetGalaxy, setVelvetGalaxy] = useState(false);
+  const [heartFlying, setHeartFlying] = useState(false);
+  const heartRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,10 +17,22 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const handleHeartClick = () => {
+  setHeartFlying(true);
+
+  setTimeout(() => {
+    setVelvetGalaxy((prev) => !prev); // toggle on/off
+    setHeartFlying(false); // stop fly & zoom
+  }, 2000); // duration of fly & zoom
+};
+
+
   return (
-    <div className={styles.home}>
-      <header className={styles.header}>
-        {/* Greeting in fixed-height container */}
+<div className={styles.home}>
+  {/* Velvet galaxy overlay */}
+  <div className={`${styles.velvetOverlay} ${velvetGalaxy ? styles.active : ""}`}></div>
+  
+        <header className={styles.header}>
         <div className={styles.greetingContainer}>
           <div className={styles.greeting}>{greetings[greetingIndex]}!</div>
         </div>
@@ -50,7 +54,17 @@ const Home = () => {
       </header>
 
       <footer className={styles.footer}>
-        <p>Made with ❤️ and a little stardust</p>
+        <p>
+          Made with{" "}
+          <span
+            ref={heartRef}
+            className={`${styles.heart} ${heartFlying ? styles.flyZoom : ""}`}
+            onClick={handleHeartClick}
+          >
+            ❤️
+          </span>{" "}
+          and a little stardust
+        </p>
       </footer>
     </div>
   );

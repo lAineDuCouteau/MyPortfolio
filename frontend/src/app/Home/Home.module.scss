@@ -8,6 +8,7 @@
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   overflow: hidden;
   position: relative;
+  user-select: none;
 
   &::before,
   &::after {
@@ -17,11 +18,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: transparent
-      url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+    background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
     background-size: auto;
     animation: moveStars 100s linear infinite;
     opacity: 0.8;
+    z-index: 0;
   }
 
   &::after {
@@ -29,6 +30,51 @@
     opacity: 0.4;
   }
 }
+
+// Overlay for smooth transition
+.velvetOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, #4a014d, #000000 80%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease-in-out; // fade effect
+  z-index: 0;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+    background-size: auto;
+    animation: moveStars 100s linear infinite;
+    opacity: 0.8;
+    z-index: 0;
+  }
+
+  &::after {
+    animation: moveStars 200s linear infinite reverse;
+    opacity: 0.4;
+  }
+}
+
+.velvetOverlay.active {
+  opacity: 1;
+}
+
+
+.header, .footer {
+  position: relative;
+  z-index: 1; // content stays above stars
+}
+
 
 @keyframes moveStars {
   from {
@@ -38,6 +84,39 @@
     background-position: 0 -1000px;
   }
 }
+
+.heart {
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.flyZoom {
+  animation: flyZoom 2s forwards;
+}
+
+@keyframes flyZoom {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  40% {
+    transform: translate(0, -50vh) scale(2);
+  }
+  80% {
+    transform: translate(0, -50vh) scale(5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0, -50vh) scale(100); // cover whole page
+    opacity: 0;
+  }
+}
+
+
+
+
 
 .header {
   max-width: 1000px;
@@ -105,4 +184,25 @@ p {
   bottom: 20px;
   font-size: 0.9rem;
   color: #777;
+}
+
+.heartGlow {
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 5px #ff66cc,
+      0 0 10px #ff66cc,
+      0 0 15px #ff66cc,
+      0 0 20px #ff66cc;
+  }
+  to {
+    text-shadow:
+      0 0 10px #ff99ff,
+      0 0 20px #ff99ff,
+      0 0 30px #ff99ff,
+      0 0 40px #ff99ff;
+  }
 }
