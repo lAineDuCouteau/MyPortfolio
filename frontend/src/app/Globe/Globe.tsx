@@ -43,7 +43,7 @@ const ContinentButton = ({ lat, lon, label }: { lat: number; lon: number; label:
       <Text
         position={[0, 0.8, 0]}   // slightly above the cylinder
         rotation={[Math.PI / -2, 0, 0]} // make it flat on the top face
-        fontSize={1.5}               // adjust size to fit the button
+        fontSize={1.3}               // adjust size to fit the button
         color="white"
         anchorX="center"
         anchorY="middle"
@@ -69,7 +69,7 @@ const RotatingGlobe = ({ buttonPositions, labels }: any) => {
       {/* Globe */}
       <mesh>
         <sphereGeometry args={[2, 64, 64]} />
-        <meshStandardMaterial color="lightblue" />
+        <meshStandardMaterial color="darkgray" />
       </mesh>
 
       {/* Buttons */}

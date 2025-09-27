@@ -1,5 +1,5 @@
 import React from 'react';
-import "./App.css"; 
+import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import Home from './app/Home/Home';
 import AboutMe from './app/AboutMe/AboutMe';
@@ -12,7 +12,7 @@ const AppWrapper = () => {
   return (
     <div className='App'>
       {/* Only render Header on /globe */}
-      {location.pathname === "/globe" && <Header />}
+      {location.pathname !== "/" && <Header />}
 
       <Routes>
         <Route path="/" element={<Home />} />
