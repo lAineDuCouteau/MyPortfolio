@@ -1,4 +1,4 @@
-.about {
+.contacts {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -7,9 +7,10 @@
   overflow: hidden;
   position: relative;
   padding: 2rem;
+  user-select: none;
 
   --bg-color: #000000; /* start color */
-  background: radial-gradient(circle at 20% 20%, #1b2735 , var(--bg-color) 80%);
+  background: radial-gradient(circle at 20% 20%, #000000 , var(--bg-color) 80%);
 
   animation: bgFadeIn 4s ease forwards;
 
@@ -45,7 +46,7 @@
     --bg-color: #000000;
   }
   to {
-    --bg-color: #032544;
+    --bg-color: #2d3004;
   }
 }
 
@@ -59,25 +60,14 @@
 }
 
 
-h2 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  color: #fff;
-  text-align: center;
-  span {
-    color: #00e5ff;
-    text-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
-  }
-}
-
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5rem;
+  gap: 10rem;
   max-width: 1500px;
   padding: 1rem;
-    transform: scale(1.2);
+  transform: scale(1.2);
   opacity: 0;
 
   @media (min-width: 768px) {
@@ -100,15 +90,55 @@ h2 {
   }
 }
 
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #ffbb00;
+}
+
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.5rem;
+  color: #ddd;
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+
+  svg {
+    font-size: 1.5rem;
+    color: #ffbb00;
+  }
+
+  &:hover {
+    background: rgba(255, 238, 0, 0.15);
+    color: #ffbb00;
+    transform: translateY(-3px);
+  }
+}
+
 .image {
   flex: 1;
   display: flex;
   justify-content: center;
-  margin-bottom: -155px;
+  margin-bottom: -100px;
 
   img {
     width: 530px;
-    height: 800px; // keep it square for circular crop
+    height: 900px; // keep it square for circular crop
     transition: transform 0.3s, box-shadow 0.3s;
     filter: drop-shadow(0 0 20px #c3d9f1); // extra glow effect
 

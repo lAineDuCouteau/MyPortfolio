@@ -22,6 +22,11 @@ const AboutMe = () => {
 
   return (
     <section className={styles.about}>
+
+      <button className={styles.backButton} onClick={handleBack}>
+            🌐↩
+          </button>
+
       <div
         className={`${styles.content} ${
           animate && !reverse ? styles.zoomInOut : ""
@@ -52,9 +57,7 @@ const AboutMe = () => {
             ✨ My goal is to combine creativity and logic to build solutions that
             are not only functional but also visually stunning.
           </p>
-          <button className={styles.backButton} onClick={handleBack}>
-            ⬅ Back
-          </button>
+          
         </div>
         <div className={styles.image}>
           <img src={profilePic} alt="Kelly S. Soberano" />
