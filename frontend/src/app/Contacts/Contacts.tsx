@@ -5,8 +5,8 @@ import contactsPic from "../../assets/contacts.png";
 
 
 // import react-icons for icons
-import { FaFacebook, FaTelegramPlane, FaViber } from "react-icons/fa";
-import { BsMessenger } from "react-icons/bs";
+import { FaTelegramPlane, FaViber } from "react-icons/fa";
+import { BsMessenger, BsFacebook } from "react-icons/bs";
 import { FiPhone } from "react-icons/fi";
 
 const Contacts = () => {
@@ -53,7 +53,7 @@ const Contacts = () => {
               rel="noopener noreferrer"
               className={styles.contactItem}
             >
-              <FaFacebook /> Facebook
+              <BsFacebook /> Facebook
             </a>
             <a
               href="https://m.me/DuCouteau64"
