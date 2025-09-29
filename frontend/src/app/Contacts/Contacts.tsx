@@ -3,11 +3,18 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Contacts.module.scss";
 import contactsPic from "../../assets/contacts.png";
 
-
 // import react-icons for icons
-import { FaTelegramPlane, FaViber } from "react-icons/fa";
-import { BsMessenger, BsFacebook } from "react-icons/bs";
+import { FaFacebook, FaTelegramPlane, FaViber } from "react-icons/fa";
+import { BsMessenger } from "react-icons/bs";
 import { FiPhone } from "react-icons/fi";
+import { IconType } from "react-icons";
+
+// Cast icons to IconType so TS accepts them as JSX components
+const FacebookIcon: IconType = FaFacebook;
+const MessengerIcon: IconType = BsMessenger;
+const PhoneIcon: IconType = FiPhone;
+const TelegramIcon: IconType = FaTelegramPlane;
+const ViberIcon: IconType = FaViber;
 
 const Contacts = () => {
   const [animate, setAnimate] = useState(false);
@@ -28,24 +35,21 @@ const Contacts = () => {
 
   return (
     <section className={styles.contacts}>
-      
-   <button className={styles.backButton} onClick={handleBack}>
-            🌐↩
-          </button>
+      <button className={styles.backButton} onClick={handleBack}>
+        🌐↩
+      </button>
 
       <div
         className={`${styles.content} ${
           animate && !reverse ? styles.zoomInOut : ""
         } ${reverse ? styles.zoomInFade : ""}`}
       >
-        
-
         <div className={styles.image}>
           <img src={contactsPic} alt="Kelly S. Soberano" />
         </div>
         <div className={styles.text}>
           <h1 className={styles.title}>Get in Touch</h1>
-          
+
           <div className={styles.contactList}>
             <a
               href="https://www.facebook.com/DuCouteau64"
@@ -53,7 +57,7 @@ const Contacts = () => {
               rel="noopener noreferrer"
               className={styles.contactItem}
             >
-              <BsFacebook /> Facebook
+              <FacebookIcon /> Facebook
             </a>
             <a
               href="https://m.me/DuCouteau64"
@@ -61,7 +65,7 @@ const Contacts = () => {
               rel="noopener noreferrer"
               className={styles.contactItem}
             >
-              <BsMessenger /> Messenger
+              <MessengerIcon /> Messenger
             </a>
             <a
               onClick={() => {
@@ -71,7 +75,7 @@ const Contacts = () => {
               className={styles.contactItem}
               style={{ cursor: "pointer" }}
             >
-              <FiPhone /> +63 926 054 4375
+              <PhoneIcon /> +63 926 054 4375
             </a>
             <a
               href="https://t.me/iamkelllll"
@@ -79,19 +83,16 @@ const Contacts = () => {
               rel="noopener noreferrer"
               className={styles.contactItem}
             >
-              <FaTelegramPlane /> Telegram
+              <TelegramIcon /> Telegram
             </a>
             <a
-              href="viber://chat?number=%2B1234567890"
+              href="viber://chat?number=%2B639260544375"
               className={styles.contactItem}
             >
-              <FaViber /> Viber
+              <ViberIcon /> Viber
             </a>
           </div>
-
-          
         </div>
-        
       </div>
       <div className={styles.fadeOverlay} />
     </section>
