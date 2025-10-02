@@ -24,7 +24,7 @@ const createGradientTexture = () => {
   
   // vertical gradient
   const gradient = ctx.createLinearGradient(0, 0, 0, size);
-  gradient.addColorStop(0, "#1e90ff"); // top (blue)
+  gradient.addColorStop(0, "#0b254dff"); // top (blue)
   gradient.addColorStop(1, "#e0698dff"); // bottom (green)
 
   ctx.fillStyle = gradient;

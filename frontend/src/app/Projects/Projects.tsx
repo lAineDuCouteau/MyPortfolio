@@ -1,46 +1,96 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 import styles from "./Projects.module.scss";
+import discoverU from "../../assets/student.png"; 
+import discoverU1 from "../../assets/student1.png";
+import discoverU2 from "../../assets/student2.png";
+import discoverU3 from "../../assets/student3.png";
+import discoverU4 from "../../assets/student4.png";
+import discoverU5 from "../../assets/guidance.png";
+import discoverU6 from "../../assets/psych.png";
+import discoverU7 from "../../assets/psych1.png";
 
-const projects = [
+
+
+
+type Project = {
+  name: string;
+  description: string;
+  urls: { label: string; link: string }[]; // 👈 updated
+  images: string[];
+  techStack: string[];
+};
+
+
+const projects: Project[] = [
   {
     name: "DiscoverU",
-    description: "A system for CvSU Students of Bacoor City Campus.",
-    url: "https://student-taupe-two.vercel.app",
-    image: null,
+    description:
+      "A web-based platform using OMR and real-time analytics to automate psychological assessments for Cavite State University – Bacoor City Campus, improving accuracy, speed, and counseling efficiency. This project have 3 level of access, the Student, Guidance(Admin), and Psychology(Super Admin).",
+    urls: [
+      { label: "Student", link: "https://student-taupe-two.vercel.app" },
+      { label: "Guidance", link: "https://guidance-ashen.vercel.app" },
+      { label: "Psychology", link: "https://psychology-eight.vercel.app" },
+    ],
+    images: [discoverU, discoverU1, discoverU2, discoverU3, discoverU4, discoverU5, discoverU6, discoverU7],
+    techStack: ["React", "TypeScript", "Node.js", "Express.js", "MongoDB", "Firebase Storage", "Python", "OpenCV"],
   },
   {
     name: "Launchpad Reservation",
     description: "My personal portfolio showcasing skills and projects.",
-    url: "https://res-v.vercel.app",
-    image: null,
+    urls: [{ label: "Portfolio", link: "https://res-v.vercel.app" }],
+    images: [],
+    techStack: ["React", "Vite", "SCSS", "Firebase"],
   },
   {
     name: "Valkyrie",
     description: "Another project deployed on Vercel.",
-    url: "https://your-other-project.vercel.app",
-    image: null,
+    urls: [{ label: "Main Site", link: "https://your-other-project.vercel.app" }],
+    images: [],
+    techStack: ["Next.js", "TailwindCSS", "TypeScript"],
   },
-  
-  
 ];
+
 
 const Projects = () => {
   const [animate, setAnimate] = useState(false);
   const [reverse, setReverse] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const navigate = useNavigate();
 
-   useEffect(() => {
-      const timer = setTimeout(() => setAnimate(true), 50);
-      return () => clearTimeout(timer);
-    }, []);
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimate(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleBack = () => {
     setReverse(true);
     setTimeout(() => {
-      navigate(-1); // go back after animation
-    }, 600); // match your animation duration
+      navigate(-1);
+    }, 600);
   };
+
+  const handleOpenModal = (project: Project) => {
+    setSelectedProject(project);
+    setCurrentSlide(0);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProject(null);
+  };
+
+  // Auto slideshow (no manual buttons)
+  useEffect(() => {
+    if (selectedProject && selectedProject.images.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % selectedProject.images.length);
+      }, 2000); // switch every 3 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [selectedProject]);
 
   return (
     <div className={`${styles.projectsPage} ${reverse ? styles.reverse : ""}`}>
@@ -48,34 +98,76 @@ const Projects = () => {
         🌐↩
       </button>
 
-<div
+      <div
         className={`${styles.projectsGrid} ${
           animate && !reverse ? styles.zoomInOut : ""
         } ${reverse ? styles.zoomInFade : ""}`}
-      >        {projects.map((project, index) => (
-          <div key={index} className={styles.projectCard}>
-            <div className={styles.cardImage}>
-              {project.image ? (
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              ) : (
-                project.name
-              )}
-            </div>
-            <div className={styles.cardContent}>
-              <p>{project.description}</p>
-            </div>
-            <div className={styles.cardActions}>
-              <a href={project.url} target="_blank" rel="noopener noreferrer">
-                Visit Project
-              </a>
-            </div>
+      >
+        {projects.map((project, index) => (
+          <div
+            key={index}
+            className={styles.projectCard}
+            onClick={() => handleOpenModal(project)}
+          >
+           <div className={styles.cardImage}>
+  {project.name}
+</div>
+
           </div>
         ))}
       </div>
+
+      {/* Modal */}
+      {selectedProject && (
+        <div className={styles.modalOverlay} onClick={handleCloseModal}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>{selectedProject.name}</h2>
+
+            {/* Automatic Slideshow */}
+            {selectedProject.images.length > 0 && (
+              <div className={styles.slideshow}>
+                <img
+                  src={selectedProject.images[currentSlide]}
+                  alt={`${selectedProject.name} slide`}
+                  style={{
+                    width: "100%",
+                    borderRadius: "8px",
+                    marginBottom: "1rem",
+                  }}
+                />
+              </div>
+            )}
+
+            <p>{selectedProject.description}</p>
+
+            <h3>Tech Used:</h3>
+            <ul>
+              {selectedProject.techStack.map((tech, idx) => (
+                <li key={idx}>{tech}</li>
+              ))}
+            </ul>
+
+            <h3>Links:</h3>
+
+            <div className={styles.modalActions}>
+              {selectedProject.urls.map((url, idx) => (
+              <a
+                key={idx}
+                href={url.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {url.label}
+              </a>
+            ))}
+              <button onClick={handleCloseModal}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
