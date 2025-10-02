@@ -6,6 +6,7 @@ import AboutMe from './app/AboutMe/AboutMe';
 import Globe from './app/Globe/Globe';
 import Header from './app/Header/Header';
 import Contacts from './app/Contacts/Contacts';
+import Projects from './app/Projects/Projects';
 
 const AppWrapper = () => {
   const location = useLocation();
@@ -20,6 +21,7 @@ const AppWrapper = () => {
         <Route path="/about" element={<AboutMe />} />
         <Route path="/globe" element={<Globe />} />
         <Route path="/contacts" element={<Contacts />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
