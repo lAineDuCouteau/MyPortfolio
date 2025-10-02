@@ -205,6 +205,7 @@ const Globe = () => {
       if (label === "Home") navigate("/");
       else if (label === "About Me") navigate("/about");
       else if (label === "Contacts") navigate("/contacts");
+      else if (label === "Projects") navigate("/projects");
     }, 1500); // match zoom + fade duration
   };
 
