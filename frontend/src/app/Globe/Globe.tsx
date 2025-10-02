@@ -15,16 +15,37 @@ const latLongToVector3 = (lat: number, lon: number, radius: number) => {
   return [x, y, z] as [number, number, number];
 };
 
+const createGradientTexture = () => {
+  const size = 512;
+  const canvas = document.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d")!;
+  
+  // vertical gradient
+  const gradient = ctx.createLinearGradient(0, 0, 0, size);
+  gradient.addColorStop(0, "#1e90ff"); // top (blue)
+  gradient.addColorStop(1, "#e0698dff"); // bottom (green)
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 1, size);
+
+  return new THREE.CanvasTexture(canvas);
+};
+
+
 // Button
 const ContinentButton = ({
   lat,
   lon,
   label,
+  color,
   onButtonClick,
 }: {
   lat: number;
   lon: number;
   label: string;
+  color: string;
   onButtonClick: (label: string) => void;
 }) => {
   const position = latLongToVector3(lat, lon, 1.93);
@@ -44,7 +65,8 @@ const ContinentButton = ({
       onPointerOut={() => (document.body.style.cursor = "default")}
     >
       <cylinderGeometry args={[6, 7, 1.5, 5]} />
-      <meshStandardMaterial color="gray" />
+      {/* apply color dynamically */}
+      <meshStandardMaterial color={color} />
       <Text
         position={[0, 0.8, 0]}
         rotation={[Math.PI / -2, 0, 0]}
@@ -59,7 +81,21 @@ const ContinentButton = ({
   );
 };
 
-const RotatingGlobe = ({ buttonPositions, labels, onButtonClick, zoomingOut }: any) => {
+
+
+const RotatingGlobe = ({
+  buttonPositions,
+  labels,
+  onButtonClick,
+  zoomingOut,
+  colors,
+}: {
+  buttonPositions: number[][];
+  labels: string[];
+  onButtonClick: (label: string) => void;
+  zoomingOut: boolean;
+  colors: string[];
+}) => {
   const groupRef = useRef<THREE.Group>(null!);
   const [progress, setProgress] = useState(0);
 
@@ -86,18 +122,22 @@ const RotatingGlobe = ({ buttonPositions, labels, onButtonClick, zoomingOut }: a
   return (
     <group ref={groupRef}>
       <mesh>
-        <sphereGeometry args={[2, 64, 64]} />
-        <meshStandardMaterial color="darkgray" />
-      </mesh>
-      {buttonPositions.map(([lat, lon]: number[], idx: number) => (
-        <ContinentButton
-          key={idx}
-          lat={lat}
-          lon={lon}
-          label={labels[idx]}
-          onButtonClick={onButtonClick}
-        />
-      ))}
+  <sphereGeometry args={[2, 64, 64]} />
+  <meshStandardMaterial map={createGradientTexture()} />
+</mesh>
+
+
+   {buttonPositions.map(([lat, lon]: number[], idx: number) => (
+  <ContinentButton
+    key={idx}
+    lat={lat}
+    lon={lon}
+    label={labels[idx]}
+    color={colors && colors[idx % colors.length]} // ✅ safe access
+    onButtonClick={onButtonClick}
+  />
+))}
+
     </group>
   );
 };
@@ -145,6 +185,18 @@ const Globe = () => {
     "Experience",
   ];
 
+  const colors = [
+  "#00e6e6", 
+  "#4d94ff", 
+  "#9f7ec0", 
+  "#f1ff74", 
+  "#f5b3df", 
+  "#db7188", 
+  "#92b5fa", 
+  "#9933ff", 
+];
+
+
   const handleButtonClick = (label: string) => {
     setZoomingOut(true);
     setFade(true); // trigger fade overlay
@@ -163,11 +215,13 @@ const Globe = () => {
   <directionalLight position={[5, 5, 5]} />
   <AnimatedCamera />
   <RotatingGlobe
-    buttonPositions={buttonPositions}
-    labels={labels}
-    onButtonClick={handleButtonClick}
-    zoomingOut={zoomingOut}
-  />
+  buttonPositions={buttonPositions}
+  labels={labels}
+  onButtonClick={handleButtonClick}
+  zoomingOut={zoomingOut}
+  colors={colors}   // 🔹 pass colors here
+/>
+
   <OrbitControls enableZoom={false} minPolarAngle={0} maxPolarAngle={Math.PI} />
 </Canvas>
 
