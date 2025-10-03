@@ -23,6 +23,14 @@ import resv2 from "../../assets/resv/resv2.png";
 import resv3 from "../../assets/resv/resv3.png";
 import resv4 from "../../assets/resv/resv4.png";
 
+import brgy from "../../assets/brgy/brgy.png";
+import brgy1 from "../../assets/brgy/brgy1.png";
+import brgy2 from "../../assets/brgy/brgy2.png";
+import mob from "../../assets/brgy/mob.png";
+import mob1 from "../../assets/brgy/mob1.png";
+import mob2 from "../../assets/brgy/mob2.png";
+import mob3 from "../../assets/brgy/mob3.png";
+
 
 
 
@@ -62,6 +70,15 @@ const projects: Project[] = [
     urls: [{ label: "File", link: "https://drive.google.com/drive/folders/1eGeS_DXDEDwsFL36Q9OAUaHfzQXO-209?usp=sharing" }],
     images: [valkyrie, valkyrie1, valkyrie2, valkyrie3, valkyrie4, valkyrie5],
     techStack: ["c#", "Unity", "2d" ],
+  },
+  {
+    name: "BrgySN3",
+    description: "A user-friendly barangay appointment system with a mobile application for the resident to easily access and use, secured by a biometrics authentication login option.",
+    urls: [
+      { label: "Admin Web", link: "https://sn3-admin-delta.vercel.app" },
+      { label: "Apk Mobile", link: "https://drive.google.com/drive/folders/14TAI1bu75jdLMMWqpb3Is1cw2llw-jXf?usp=sharing" }],
+    images: [brgy, brgy1, brgy2, mob, mob1, mob2, mob3],
+    techStack: ["JavaScript", "CSS", "React", "Firestore Database", "Firebase Storage", "Firebase Authentication", "Express.js", "Flutter", "Dart", "Android Studio" ],
   },
 ];
 
