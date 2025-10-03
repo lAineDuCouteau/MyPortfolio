@@ -49,8 +49,23 @@ const Home = () => {
         </p>
 
         <Link to="/globe">
-          <button className={styles.ctaButton}>˙⋆🌟⋆˙</button>
-        </Link>
+  <button className={styles.ctaButton}>
+    ˙⋆🌟⋆˙
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+    <span className={styles.sparkle}></span>
+  </button>
+</Link>
+
       </header>
 
       <footer className={styles.footer}>
