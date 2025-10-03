@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 
 const greetings = ["Hello", "Hola", "Bonjour", "Ciao", "こんにちは", "안녕하세요", "مرحبا", "Olá", "Hallo", "Привет"];
 
-const Home = () => {
+type HomeProps = {
+  unmuteAudio: () => void;
+};
+
+const Home: React.FC<HomeProps> = ({ unmuteAudio }) => {
   const [greetingIndex, setGreetingIndex] = useState(0);
   const [velvetGalaxy, setVelvetGalaxy] = useState(false);
   const [heartFlying, setHeartFlying] = useState(false);
@@ -48,7 +52,7 @@ const Home = () => {
           code I’ve created.
         </p>
 
-        <Link to="/globe">
+        <Link to="/globe" onClick={unmuteAudio}>
   <button className={styles.ctaButton}>
     ˙⋆🌟⋆˙
     <span className={styles.sparkle}></span>
@@ -56,7 +60,6 @@ const Home = () => {
     <span className={styles.sparkle}></span>
     <span className={styles.sparkle}></span>
     <span className={styles.sparkle}></span>
-
     <span className={styles.sparkle}></span>
     <span className={styles.sparkle}></span>
     <span className={styles.sparkle}></span>
@@ -65,6 +68,7 @@ const Home = () => {
     <span className={styles.sparkle}></span>
   </button>
 </Link>
+
 
       </header>
 
@@ -80,6 +84,7 @@ const Home = () => {
           </span>{" "}
           and a little stardust
         </p>
+        
       </footer>
     </div>
   );

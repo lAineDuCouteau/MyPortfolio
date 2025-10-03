@@ -1,0 +1,273 @@
+.musicContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;  
+  overflow: hidden;
+  position: relative;
+  padding: 2rem;
+  user-select: none;
+
+  --bg-color: #000000; /* start color */
+  background: radial-gradient(circle at 20% 20%, #000000 , var(--bg-color) 80%);
+
+  animation: bgFadeIn 4s ease forwards;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+    animation: moveStars 150s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  &::after {
+    animation: moveStars 300s linear infinite reverse;
+    opacity: 0.4;
+  }
+
+/* Tell the browser our custom property is a color and can be animated */
+@property --bg-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #000000;
+}
+
+@keyframes bgFadeIn {
+  from {
+    --bg-color: #000000;
+  }
+  to {
+    --bg-color: #360f19;
+  }
+}
+
+@keyframes moveStars {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -1000px;
+  }
+}
+
+}
+
+  .fadeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.699); // full dark screen
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: 10;
+}
+
+.fadeActive {
+  opacity: 1; // full black when active
+}
+
+.zoomInOut {
+  animation: zoomOutFade .5s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+.backButton {
+  position: fixed;
+  bottom: 2rem;   // distance from bottom
+  left: 2rem;     // distance from left
+  padding: 0.8rem 1.5rem;
+  font-size: 3rem;
+  background: #00e5ff00;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s;
+  z-index: 1000; // stays above other content
+
+  &:hover {
+    transform: scale(1.05);
+      text-shadow: 0 0 15px #fff, 0 0 30px rgb(209, 181, 207), 0 0 45px rgb(209, 192, 209);
+
+  }
+}
+
+
+.zoomInOut {
+  animation: zoomOutFade 0.6s ease forwards;
+}
+
+.zoomInFade {
+  animation: zoomInFade 0.6s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomInFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.albumGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 60px;
+  opacity: 0;
+  transform: scale(1.1);
+  transition: all 0.6s ease;
+
+  &.zoomInOut {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &.zoomInFade {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+.albumCard {
+  background: #181818;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    background: #282828;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 6px 18px rgba(185, 29, 81, 0.6);
+
+    .albumCover {
+      transform: scale(1.05);
+    }
+
+    .playButton {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.albumImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.albumCover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.playButton {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: #ca1341;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #d83c63;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgb(243, 54, 133);
+  }
+}
+
+.albumTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 12px;
+}
+
+.musicTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #e2275f; // Spotify green
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 0 10px rgb(185, 29, 68);
+}
+
+.activeCard {
+  border: 2px solid #e2275f; // Spotify green
+  box-shadow: 0 0 20px rgba(253, 70, 147, 0.7);
+  transform: scale(1.05);
+}
+
+.activePlay {
+  background: #e2275f !important;
+  opacity: 1 !important;
+  box-shadow: 0 0 15px rgba(253, 70, 147, 0.7);
+}
+
+.activeTitle {
+  color: #e2275f;
+  text-shadow: 0 0 8px rgba(253, 70, 147, 0.7);
+}
