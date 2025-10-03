@@ -7,6 +7,7 @@
   overflow: hidden;
   position: relative;
   padding: 2rem;
+  user-select: none;
 
   --bg-color: #000000; /* start color */
   background: radial-gradient(circle at 20% 20%, #000000 , var(--bg-color) 80%);
@@ -246,7 +247,7 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .modalActions a, 
@@ -269,12 +270,15 @@
 }
 
 .modalContent ul {
-  list-style: none;
+  list-style: none;      /* optional: remove bullets */
   padding: 0;
-  margin: 0.5rem 0 1.5rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  margin: 0 auto;        /* centers the list itself */
+  display: flex;         /* makes the items align in a row */
+  justify-content: center; /* centers items horizontally */
+  gap: .5rem;             /* spacing between items */
+  flex-wrap: wrap;       /* allows wrapping if too many items */
+  text-align: center;
+  margin-top: 10px;
 }
 
 .modalContent li {
