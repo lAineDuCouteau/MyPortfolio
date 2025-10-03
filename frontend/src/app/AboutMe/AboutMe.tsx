@@ -22,6 +22,14 @@ const AboutMe = () => {
     }, 600);
   };
 
+  const handleContact = () => {
+  setReverse(true);
+  setTimeout(() => {
+    navigate("/contacts");
+  }, 600);
+};
+
+
   return (
     <section className={styles.about}>
       <button className={styles.backButton} onClick={handleBack}>
@@ -66,7 +74,7 @@ const AboutMe = () => {
               ℹ️ LinkedIn
             </a>
              <button
-              onClick={() => navigate("/contacts")}
+              onClick={handleContact}
               className={styles.btn}
             >
               👋 Get in Touch
