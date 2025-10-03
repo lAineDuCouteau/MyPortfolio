@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 import styles from "./Projects.module.scss";
-import discoverU from "../../assets/student.png"; 
-import discoverU1 from "../../assets/student1.png";
-import discoverU2 from "../../assets/student2.png";
-import discoverU3 from "../../assets/student3.png";
-import discoverU4 from "../../assets/student4.png";
-import discoverU5 from "../../assets/guidance.png";
-import discoverU6 from "../../assets/psych.png";
-import discoverU7 from "../../assets/psych1.png";
+import discoverU from "../../assets/discoverU/student.png"; 
+import discoverU1 from "../../assets/discoverU/student1.png";
+import discoverU2 from "../../assets/discoverU/student2.png";
+import discoverU3 from "../../assets/discoverU/student3.png";
+import discoverU4 from "../../assets/discoverU/student4.png";
+import discoverU5 from "../../assets/discoverU/guidance.png";
+import discoverU6 from "../../assets/discoverU/psych.png";
+import discoverU7 from "../../assets/discoverU/psych1.png";
 
-import valkyrie from "../../assets/valkyrie.png";
-import valkyrie1 from "../../assets/valkyrie1.png";
-import valkyrie2 from "../../assets/valkyrie2.png";
-import valkyrie3 from "../../assets/valkyrie3.png";
-import valkyrie4 from "../../assets/valkyrie4.png";
-import valkyrie5 from "../../assets/valkyrie5.png";
+import valkyrie from "../../assets/valkyrie/valkyrie.png";
+import valkyrie1 from "../../assets/valkyrie/valkyrie1.png";
+import valkyrie2 from "../../assets/valkyrie/valkyrie2.png";
+import valkyrie3 from "../../assets/valkyrie/valkyrie3.png";
+import valkyrie4 from "../../assets/valkyrie/valkyrie4.png";
+import valkyrie5 from "../../assets/valkyrie/valkyrie5.png";
+
+import resv from "../../assets/resv/resv.png";
+import resv1 from "../../assets/resv/resv1.png";
+import resv2 from "../../assets/resv/resv2.png";
+import resv3 from "../../assets/resv/resv3.png";
+import resv4 from "../../assets/resv/resv4.png";
 
 
 
@@ -45,10 +51,10 @@ const projects: Project[] = [
   },
   {
     name: "Launchpad Reservation",
-    description: "My personal portfolio showcasing skills and projects.",
-    urls: [{ label: "Portfolio", link: "https://res-v.vercel.app" }],
-    images: [],
-    techStack: ["React", "Vite", "SCSS", "Firebase"],
+    description: "The ResV project, a seat reservation platform, aims to simplify the process of managing seat reservations for both administrators and customers. Built using a robust tech stack, including React for the user interface and Node.js with Express for the backend, ResV provides a responsive, reliable, and user-friendly experience..",
+    urls: [{ label: "Link", link: "https://res-v.vercel.app" }],
+    images: [resv, resv1, resv2, resv3, resv4],
+    techStack: ["React", "Node.js", "Express", "Mongodb", "Firebase"],
   },
   {
     name: "Valkyrie",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Contacts.module.scss";
-import contactsPic from "../../assets/contacts.png";
+import contactsPic from "../../assets/me/contacts.png";
 
 
 const Contacts = () => {

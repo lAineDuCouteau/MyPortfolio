@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // for routing
+import { useNavigate } from "react-router-dom";
 import styles from "./AboutMe.module.scss";
-import profilePic from "../../assets/profile.png";
+import profilePic from "../../assets/me/profile.png";
+import myCV from "../../assets/me/KelCV.pdf"; 
+
 
 const AboutMe = () => {
   const [animate, setAnimate] = useState(false);
@@ -16,16 +18,15 @@ const AboutMe = () => {
   const handleBack = () => {
     setReverse(true);
     setTimeout(() => {
-      navigate(-1); // go back after animation
-    }, 600); // match your animation duration
+      navigate(-1);
+    }, 600);
   };
 
   return (
     <section className={styles.about}>
-
       <button className={styles.backButton} onClick={handleBack}>
-            🌐↩
-          </button>
+        🌐↩
+      </button>
 
       <div
         className={`${styles.content} ${
@@ -36,29 +37,43 @@ const AboutMe = () => {
           <h2>
             Hello! I'm <span>Kelly S. Soberano</span>
           </h2>
-          <p>
-            ✨ I'm <strong>25 years old</strong>, a passionate developer and
-            problem solver.
-          </p>
-          <p>
-            ✨ Graduated from{" "}
-            <strong>Cavite State University - Bacoor City Campus</strong>.
-          </p>
-          <p>
-            ✨ I love tackling logic puzzles, diving into mathematical
-            challenges, and learning new algorithms.
-          </p>
-          <p>
-            ✨ When I'm coding, I can't stop until I attain the goal in my
-            creative mind and be satisfied of the outcome.
-          </p>
+          <p>✨ I'm <strong>25 years old</strong>, a passionate developer and problem solver.</p>
+          <p>✨ Graduated from <strong>Cavite State University - Bacoor City Campus</strong>.</p>
+          <p>✨ I love tackling logic puzzles, diving into mathematical challenges, and learning new algorithms.</p>
+          <p>✨ When I'm coding, I can't stop until I attain the goal in my creative mind and be satisfied of the outcome.</p>
           <p>✨ Fun fact: I enjoy being competetive in every thing I do.</p>
-          <p>
-            ✨ My goal is to combine creativity and logic to build solutions that
-            are not only functional but also visually stunning.
-          </p>
-          
+          <p>✨ My goal is to combine creativity and logic to build solutions that are not only functional but also visually stunning.</p>
+
+          {/* Buttons Section */}
+          <div className={styles.buttons}>
+            <a href={myCV} download="KellySoberanoCV.pdf" className={styles.btn}>
+              📄 Download CV
+            </a>
+            <a
+              href="https://github.com/lAineDuCouteau"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btn}
+            >
+              💻 GitHub
+            </a>
+             <a
+              href="https://www.linkedin.com/in/kelly-soberano-29859727b"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btn}
+            >
+              ℹ️ LinkedIn
+            </a>
+             <button
+              onClick={() => navigate("/contacts")}
+              className={styles.btn}
+            >
+              👋 Get in Touch
+            </button>
+          </div>
         </div>
+
         <div className={styles.image}>
           <img src={profilePic} alt="Kelly S. Soberano" />
         </div>
