@@ -1,113 +1,224 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./ShootingGame.module.scss";
-import jetImg from "../../../assets/games/jet.png";     // Your jet image
-import alienImg from "../../../assets/games/alien.png"; // Your enemy image
+import jetImg from "../../../assets/games/jet.png";
+import alienImg from "../../../assets/games/alien.png";
+import { useNavigate } from "react-router-dom";
 
 interface Bullet {
   x: number;
   y: number;
+  trail: number[];
 }
 
 interface Enemy {
   x: number;
   y: number;
+  type: "fast" | "slow";
 }
+
+interface Explosion {
+  x: number;
+  y: number;
+  radius: number;
+  alpha: number;
+}
+
+const canvasWidth = 500;
+const canvasHeight = 600;
 
 const ShootingGame: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [bullets, setBullets] = useState<Bullet[]>([]);
-  const [enemies, setEnemies] = useState<Enemy[]>([]);
-  const [jetX, setJetX] = useState(250);
-  const [score, setScore] = useState(0);
+  const jetImgRef = useRef<HTMLImageElement>(new Image());
+  const enemyImgRef = useRef<HTMLImageElement>(new Image());
 
-  const canvasWidth = 500;
-  const canvasHeight = 600;
+  const bulletsRef = useRef<Bullet[]>([]);
+  const enemiesRef = useRef<Enemy[]>([]);
+  const explosionsRef = useRef<Explosion[]>([]);
+  const jetXRef = useRef<number>(canvasWidth / 2 - 25);
+  const scoreRef = useRef<number>(0);
+
+  const [gameOver, setGameOver] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const [reverse, setReverse] = useState(false);
+  const [, setRender] = useState(0); // force render for score
+  const navigate = useNavigate();
+
+  // Load images once
+  useEffect(() => {
+    jetImgRef.current.src = jetImg;
+    enemyImgRef.current.src = alienImg;
+  }, []);
 
   // Spawn enemies
   useEffect(() => {
-    const interval = setInterval(() => {
-      setEnemies((prev) => [...prev, { x: Math.random() * (canvasWidth - 50), y: 0 }]);
-    }, 1500);
-    return () => clearInterval(interval);
-  }, []);
+    const spawnInterval = setInterval(() => {
+      if (!gameOver) {
+        const type = Math.random() < 0.5 ? "fast" : "slow";
+        enemiesRef.current.push({
+          x: Math.random() * (canvasWidth - 40),
+          y: 0,
+          type,
+        });
+      }
+    }, 1200);
+    return () => clearInterval(spawnInterval);
+  }, [gameOver]);
 
   // Game loop
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d");
-    let animationId: number;
+    if (!ctx) return;
 
     const gameLoop = () => {
-      if (!ctx) return;
-
-      // Clear canvas
-      ctx.fillStyle = "#0a0a0a";
-      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
       // Draw jet
-      const jetImgEl = new Image();
-      jetImgEl.src = jetImg;
-      ctx.drawImage(jetImgEl, jetX, canvasHeight - 80, 50, 50);
+      ctx.drawImage(jetImgRef.current, jetXRef.current, canvasHeight - 80, 50, 50);
 
-      // Move and draw bullets
-      const newBullets = bullets.map((b) => ({ x: b.x, y: b.y - 5 }));
-      setBullets(newBullets.filter((b) => b.y > 0));
+      // Move bullets
+      bulletsRef.current = bulletsRef.current
+        .map((b) => ({ x: b.x, y: b.y - 8, trail: [b.y, ...b.trail].slice(0, 5) }))
+        .filter((b) => b.y > 0);
 
-      ctx.fillStyle = "#0ff";
-      newBullets.forEach((b) => ctx.fillRect(b.x + 22, b.y, 6, 12));
+      // Draw bullets
+      bulletsRef.current.forEach((b) => {
+        b.trail.forEach((ty, i) => {
+          ctx.fillStyle = `rgba(0,255,255,${0.2 - i * 0.03})`;
+          ctx.fillRect(b.x + 22, ty, 6, 12);
+        });
+        ctx.fillStyle = "#0ff";
+        ctx.fillRect(b.x + 22, b.y, 6, 12);
+      });
 
-      // Move and draw enemies
-      const newEnemies = enemies.map((e) => ({ x: e.x, y: e.y + 2 }));
-      setEnemies(newEnemies.filter((e) => e.y < canvasHeight));
+      // Move enemies
+      enemiesRef.current = enemiesRef.current
+        .map((e) => ({ ...e, y: e.y + (e.type === "fast" ? 1 : 0.5) }))
+        .filter((e) => e.y < canvasHeight);
 
-      const enemyImgEl = new Image();
-      enemyImgEl.src = alienImg;
-      newEnemies.forEach((e) => ctx.drawImage(enemyImgEl, e.x, e.y, 40, 40));
+      // Draw enemies
+      enemiesRef.current.forEach((e) => {
+        ctx.save();
+        ctx.shadowColor = e.type === "fast" ? "#ff3ca6" : "#0ff";
+        ctx.shadowBlur = 10;
+        ctx.drawImage(enemyImgRef.current, e.x, e.y, 40, 40);
+        ctx.restore();
+      });
 
-      // Collision detection
-      newEnemies.forEach((enemy, i) => {
-        newBullets.forEach((bullet, j) => {
+      // Bullet-Enemy collision
+      bulletsRef.current.forEach((b, bi) => {
+        enemiesRef.current.forEach((e, ei) => {
           if (
-            bullet.x < enemy.x + 40 &&
-            bullet.x + 6 > enemy.x &&
-            bullet.y < enemy.y + 40 &&
-            bullet.y + 12 > enemy.y
+            b.x + 6 > e.x - 5 &&
+            b.x < e.x - 5 + 50 &&
+            b.y + 12 > e.y - 5 &&
+            b.y < e.y - 5 + 50
           ) {
-            setEnemies((prev) => prev.filter((_, idx) => idx !== i));
-            setBullets((prev) => prev.filter((_, idx) => idx !== j));
-            setScore((s) => s + 1);
+            explosionsRef.current.push({ x: e.x + 20, y: e.y + 20, radius: 0, alpha: 1 });
+            bulletsRef.current.splice(bi, 1);
+            enemiesRef.current.splice(ei, 1);
+            scoreRef.current += e.type === "fast" ? 2 : 1;
+            setRender((r) => r + 1);
           }
         });
+      });
+
+      // Jet-Enemy collision (Game Over)
+      enemiesRef.current.forEach((e) => {
+        const jetWidth = 50;
+        const jetHeight = 50;
+        const enemyWidth = 40;
+        const enemyHeight = 40;
+
+        if (
+          jetXRef.current < e.x + enemyWidth &&
+          jetXRef.current + jetWidth > e.x &&
+          canvasHeight - 80 < e.y + enemyHeight &&
+          canvasHeight - 80 + jetHeight > e.y
+        ) {
+          setGameOver(true);
+        }
+      });
+
+      // Draw explosions
+      explosionsRef.current = explosionsRef.current
+        .map((exp) => ({ ...exp, radius: exp.radius + 2, alpha: exp.alpha - 0.05 }))
+        .filter((exp) => exp.alpha > 0);
+
+      explosionsRef.current.forEach((exp) => {
+        ctx.beginPath();
+        ctx.arc(exp.x, exp.y, exp.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${exp.alpha})`;
+        ctx.fill();
       });
 
       // Draw score
       ctx.fillStyle = "#ff3ca6";
       ctx.font = "20px Orbitron";
-      ctx.fillText(`Score: ${score}`, 10, 30);
+      ctx.fillText(`Score: ${scoreRef.current}`, 40, 30);
 
-      animationId = requestAnimationFrame(gameLoop);
+      // Game Over text
+      if (gameOver) {
+        ctx.fillStyle = "#ff3ca6";
+        ctx.font = "40px Orbitron";
+        ctx.textAlign = "center";
+        ctx.fillText("💀 GAME OVER 💀", canvasWidth / 2, canvasHeight / 2);
+      }
+
+      if (!gameOver) requestAnimationFrame(gameLoop);
     };
 
     gameLoop();
-    return () => cancelAnimationFrame(animationId);
-  }, [bullets, enemies, jetX, score]);
+  }, [gameOver]);
 
-  // Handle controls
+  // Controls
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") setJetX((x) => Math.max(0, x - 20));
-      if (e.key === "ArrowRight") setJetX((x) => Math.min(canvasWidth - 50, x + 20));
-      if (e.key === " ") {
-        setBullets((prev) => [...prev, { x: jetX, y: canvasHeight - 80 }]);
+      if (!gameOver) {
+        if (e.key === "ArrowLeft") jetXRef.current = Math.max(0, jetXRef.current - 20);
+        if (e.key === "ArrowRight") jetXRef.current = Math.min(canvasWidth - 50, jetXRef.current + 20);
+        if (e.key === " ") bulletsRef.current.push({ x: jetXRef.current, y: canvasHeight - 80, trail: [] });
       }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [jetX]);
+  }, [gameOver]);
+
+  // Animations
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimate(true), 50);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleBack = () => {
+    setReverse(true);
+    setTimeout(() => navigate(-1), 600);
+  };
 
   return (
     <div className={styles.mainContainer}>
-      <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} />
-      <p className={styles.controls}>Use ← → to move, Space to shoot!</p>
+      <button className={styles.backButton} onClick={handleBack}>
+        🎮↩
+      </button>
+      <div className={`${styles.container} ${animate && !reverse ? styles.zoomInOut : ""} ${reverse ? styles.zoomInFade : ""}`}>
+        <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} />
+        <p className={styles.controls}>Use ← → to move, Space to shoot!</p>
+        {gameOver && (
+          <button
+            className={styles.restartButton}
+            onClick={() => {
+              enemiesRef.current = [];
+              bulletsRef.current = [];
+              explosionsRef.current = [];
+              jetXRef.current = canvasWidth / 2 - 25;
+              scoreRef.current = 0;
+              setGameOver(false);
+              setRender((r) => r + 1);
+            }}
+          >
+            Restart
+          </button>
+        )}
+      </div>
     </div>
   );
 };

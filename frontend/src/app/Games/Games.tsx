@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Games.module.scss";
 import snakeImg from "../../assets/games/snake.png";
 import puzzleImg from "../../assets/games/puzzlebg.png";
+import shootingImg from "../../assets/games/shooting.png";
+import soonImg from "../../assets/games/soon.png";
 
 
 const Games: React.FC = () => {
@@ -18,9 +20,8 @@ const Games: React.FC = () => {
   const games = [
   { name: "Snake", path: "/snake", img: snakeImg, icon: "🐍", desc: "Classic Snake Game" },
   { name: "Puzzle", path: "/puzzle", img: puzzleImg, icon: "🧩", desc: "Star Puzzle Game" },
-  { name: "Shooting Game", path: "/shooting", img: snakeImg, icon: "👾", desc: "Shooting Game" },
-  { name: "Pac-Man", path: "/pacman", img: snakeImg, icon: "👾", desc: "Eat the dots, avoid ghosts!" },
-  { name: "Space Invaders", path: "/space", img: snakeImg, icon: "🚀", desc: "Defend against alien invasion" },
+  { name: "Shooting Game", path: "/shooting", img: shootingImg, icon: "👾", desc: "Space Shooting Game" },
+  { name: "Coming Soon...", img: soonImg, icon: "💫", desc: "Soon to add new games." },
 ];
 
   // Auto rotation
@@ -112,15 +113,18 @@ const Games: React.FC = () => {
     const rotation = (360 / games.length) * index; // auto-angle
     return (
       <div
-        key={game.name}
-        className={styles.card}
-        style={{ transform: `rotateY(${rotation}deg) translateZ(400px)` }}
-        onClick={() => navigate(game.path)}
-      >
-        <img src={game.img} alt={game.name} className={styles.cardImage} />
-        <h2>{game.icon} {game.name}</h2>
-        <p>{game.desc}</p>
-      </div>
+  key={game.name}
+  className={styles.card}
+  style={{ transform: `rotateY(${rotation}deg) translateZ(400px)` }}
+  onClick={() => {
+    if (game.path) navigate(game.path); // only navigate if path exists
+  }}
+>
+  <img src={game.img} alt={game.name} className={styles.cardImage} />
+  <h2>{game.icon} {game.name}</h2>
+  <p>{game.desc}</p>
+</div>
+
     );
   })}
 </div>

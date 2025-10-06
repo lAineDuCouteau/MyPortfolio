@@ -1,3 +1,12 @@
+$neon-blue: rgb(0, 0, 0);
+$neon-pink: #ffffff;
+
+@keyframes bgPulse {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -15,32 +24,144 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, #0ff 2px, transparent 2px),
-                radial-gradient(circle, #ff3ca6 2px, transparent 2px);
+    background: radial-gradient(circle, $neon-blue 2px, transparent 2px),
+                radial-gradient(circle, $neon-pink 2px, transparent 2px);
     background-size: 20px 20px, 25px 25px;
     animation: bgPulse 10s linear infinite;
     z-index: 0;
   }
 
   canvas {
-    border: 2px solid #0ff;
-    box-shadow: 0 0 15px #0ff, 0 0 30px #ff3ca6;
+    border: 2px solid $neon-blue;
+    box-shadow: 0 0 15px $neon-blue, 0 0 30px $neon-pink;
     position: relative;
     z-index: 1;
+    background: #0a0a0a;
   }
 
   .controls {
-    color: #0ff;
+    color: white;
     font-family: 'Orbitron', sans-serif;
     margin-top: 10px;
-    text-shadow: 0 0 5px #0ff;
+    text-shadow: 0 0 5px $neon-blue;
     position: relative;
+    text-align: center;
     z-index: 1;
+  }
+
+.restartButton {
+  display: block;       // makes the button a block element
+  margin: 20px auto;    // centers horizontally with 20px top/bottom
+  padding: 10px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  background: transparent;
+  border: 2px solid rgb(255, 173, 173);
+  border-radius: 10px;
+  cursor: pointer;
+  text-shadow: 0 0 5px rgb(247, 130, 130);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+
+  &:hover {
+    color: rgb(255, 170, 170);
+    border-color: rgb(252, 118, 118);
+    box-shadow: 0 0 10px rgb(245, 160, 160), 0 0 20px rgb(253, 29, 29);
+    transform: scale(1.05);
   }
 }
 
-@keyframes bgPulse {
-  0% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.05) rotate(180deg); }
-  100% { transform: scale(1) rotate(360deg); }
+}
+
+.container {
+        opacity: 0;
+  transform: scale(1.1);
+}
+
+.fadeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.699); // full dark screen
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: 10;
+}
+
+.fadeActive {
+  opacity: 1; // full black when active
+}
+
+.zoomInOut {
+  animation: zoomOutFade .5s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+  .backButton {
+  position: fixed;
+  bottom: 2rem;   // distance from bottom
+  left: 2rem;     // distance from left
+  padding: 0.8rem 1.5rem;
+  font-size: 3rem;
+  background: #00e5ff00;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s;
+  z-index: 1000; // stays above other content
+
+  &:hover {
+    transform: scale(1.05);
+      text-shadow: 0 0 15px #fff, 0 0 30px rgb(209, 181, 207), 0 0 45px rgb(209, 192, 209);
+
+  }
+}
+
+
+
+.zoomInOut {
+  animation: zoomOutFade 0.6s ease forwards;
+}
+
+.zoomInFade {
+  animation: zoomInFade 0.6s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomInFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
 }
