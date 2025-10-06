@@ -176,7 +176,7 @@ const Globe = () => {
 
   const labels = [
     "Home",
-    "Foods",
+    "Games",
     "Projects",
     "Contacts",
     "Hobbies",
@@ -207,6 +207,7 @@ const Globe = () => {
       else if (label === "Contacts") navigate("/contacts");
       else if (label === "Projects") navigate("/projects");
       else if (label === "Music") navigate("/music");
+      else if (label === "Hobbies") navigate("/hobbies");
     }, 1500); // match zoom + fade duration
   };
 
