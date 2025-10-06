@@ -208,6 +208,8 @@ const Globe = () => {
       else if (label === "Projects") navigate("/projects");
       else if (label === "Music") navigate("/music");
       else if (label === "Hobbies") navigate("/hobbies");
+      else if (label === "Games") navigate("/games");
+
     }, 1500); // match zoom + fade duration
   };
 

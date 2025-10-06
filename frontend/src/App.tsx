@@ -8,6 +8,8 @@ import Contacts from "./app/Contacts/Contacts";
 import Projects from "./app/Projects/Projects";
 import Music from "./app/Music/Music";
 import Hobbies from "./app/Hobbies/Hobbies";
+import Games from "./app/Games/Games";
+
 
 import './App.css';
 import sound1 from "./assets/mp3/sound1.mp3";
@@ -147,6 +149,8 @@ useEffect(() => {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/hobbies" element={<Hobbies />} />
+        <Route path="/games" element={<Games />} />
+
         <Route
           path="/music"
           element={

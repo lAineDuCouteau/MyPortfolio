@@ -54,6 +54,15 @@ const Hobbies = () => {
       >
         {hobbies.map((hobby, index) => (
           <li key={index} className={styles.hobbyCard}>
+            {/* ⭐ Only show star on Gaming card */}
+            {hobby.title === "Gaming" && (
+              <button 
+                className={styles.starButton} 
+                onClick={() => navigate("/games")}
+              >
+                ⭐
+              </button>
+            )}
             <img src={hobby.image} alt={hobby.title} className={styles.hobbyImage} />
             <div className={styles.hobbyContent}>
               <h3 className={styles.hobbyTitle}>{hobby.title}</h3>
