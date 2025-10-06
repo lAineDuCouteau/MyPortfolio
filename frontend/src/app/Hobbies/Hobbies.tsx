@@ -47,7 +47,6 @@ const Hobbies = () => {
       <button className={styles.backButton} onClick={handleBack}>
         🌐↩
       </button>
-      <h2 className={styles.title}>My Hobbies</h2>
       <ul
         className={`${styles.hobbiesList} ${
           animate && !reverse ? styles.zoomInOut : ""
