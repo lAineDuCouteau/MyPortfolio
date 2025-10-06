@@ -42,6 +42,13 @@ const Hobbies = () => {
     }, 600);
   };
 
+  const handleGames = () => {
+  setReverse(true);
+  setTimeout(() => {
+    navigate("/games");
+  }, 600);
+};
+
   return (
     <div className={styles.hobbiesContainer}>
       <button className={styles.backButton} onClick={handleBack}>
@@ -58,7 +65,7 @@ const Hobbies = () => {
             {hobby.title === "Gaming" && (
               <button 
                 className={styles.starButton} 
-                onClick={() => navigate("/games")}
+                onClick={handleGames}
               >
                 ⭐
               </button>
