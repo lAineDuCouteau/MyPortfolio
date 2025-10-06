@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Games.module.scss";
 import snakeImg from "../../assets/games/snake.png";
+import puzzleImg from "../../assets/games/puzzlebg.png";
 
 
 const Games: React.FC = () => {
@@ -16,8 +17,8 @@ const Games: React.FC = () => {
 
   const games = [
   { name: "Snake", path: "/snake", img: snakeImg, icon: "🐍", desc: "Classic Snake Game" },
-  { name: "Tetris", path: "/tetris", img: snakeImg, icon: "🧩", desc: "Classic Tetris Game" },
-  { name: "Bounce", path: "/bounce", img: snakeImg, icon: "🏀", desc: "Classic Bounce Game" },
+  { name: "Puzzle", path: "/puzzle", img: puzzleImg, icon: "🧩", desc: "Star Puzzle Game" },
+  { name: "Shooting Game", path: "/shooting", img: snakeImg, icon: "👾", desc: "Shooting Game" },
   { name: "Pac-Man", path: "/pacman", img: snakeImg, icon: "👾", desc: "Eat the dots, avoid ghosts!" },
   { name: "Space Invaders", path: "/space", img: snakeImg, icon: "🚀", desc: "Defend against alien invasion" },
 ];

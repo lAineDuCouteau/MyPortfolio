@@ -1,0 +1,46 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, #0ff 2px, transparent 2px),
+                radial-gradient(circle, #ff3ca6 2px, transparent 2px);
+    background-size: 20px 20px, 25px 25px;
+    animation: bgPulse 10s linear infinite;
+    z-index: 0;
+  }
+
+  canvas {
+    border: 2px solid #0ff;
+    box-shadow: 0 0 15px #0ff, 0 0 30px #ff3ca6;
+    position: relative;
+    z-index: 1;
+  }
+
+  .controls {
+    color: #0ff;
+    font-family: 'Orbitron', sans-serif;
+    margin-top: 10px;
+    text-shadow: 0 0 5px #0ff;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@keyframes bgPulse {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}

@@ -8,8 +8,12 @@ import Contacts from "./app/Contacts/Contacts";
 import Projects from "./app/Projects/Projects";
 import Music from "./app/Music/Music";
 import Hobbies from "./app/Hobbies/Hobbies";
+
 import Games from "./app/Games/Games";
 import Snake from "./app/Games/Game1/Snake";
+import Puzzle from "./app/Games/Game2/Puzzle";
+import ShootingGame from "./app/Games/Game3/ShootingGame";
+
 
 
 
@@ -154,6 +158,8 @@ useEffect(() => {
 
         <Route path="/games" element={<Games />} />
         <Route path="/snake" element={<Snake />} />
+        <Route path="/puzzle" element={<Puzzle />} />
+        <Route path="/shooting" element={<ShootingGame />} />
 
 
         <Route

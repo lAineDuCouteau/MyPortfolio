@@ -1,0 +1,225 @@
+$neon-blue: #0ff;
+$neon-pink: #ff3ca6;
+$dark-bg: #0a0a0a00;
+$tile-shadow: 0 0 10px $neon-blue, 0 0 20px $neon-pink;
+
+@keyframes particleMove {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-2000px) translateX(100px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes bgPulse {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.05) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgb(0, 255, 255) 1px, transparent 1px),
+                radial-gradient(circle, rgb(255, 60, 167) 1px, transparent 1px);
+    background-size: 20px 20px, 25px 25px;
+    animation: bgPulse 10s linear infinite;
+    z-index: 0;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+  background: $dark-bg;
+  min-height: 80vh;
+  color: $neon-blue;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+    opacity: 0;
+  transform: scale(1.1);
+
+  h1 {
+    font-size: 3rem;
+    text-shadow: 0 0 10px $neon-blue, 0 0 20px $neon-pink;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    color: $neon-pink;
+    text-shadow: 0 0 5px $neon-pink;
+    position: relative;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: $neon-blue;
+    background: transparent;
+    border: 2px solid $neon-blue;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px $neon-blue;
+    position: relative;
+
+    &:hover {
+      color: $neon-pink;
+      border-color: $neon-pink;
+      box-shadow: 0 0 10px $neon-pink, 0 0 20px $neon-blue;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.grid {
+  position: relative;
+  border: 2px solid $neon-blue;
+  margin-bottom: 20px;
+  background: #111;
+  border-radius: 10px;
+  box-shadow: 0 0 20px $neon-blue inset;
+  z-index: 1;
+}
+
+.tile {
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  border: 2px solid $neon-blue;
+  background-color: #222;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: $tile-shadow;
+  user-select: none;
+  z-index: 1;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px $neon-pink, 0 0 40px $neon-blue;
+  }
+}
+
+.solved {
+  color: $neon-pink;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 0 15px $neon-pink, 0 0 30px $neon-blue;
+  position: relative;
+  z-index: 1;
+}
+
+// Particle animation
+@keyframes bgPulse {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 1000px 2000px, -1000px -1500px; }
+}
+
+
+
+.fadeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.699); // full dark screen
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: 10;
+}
+
+.fadeActive {
+  opacity: 1; // full black when active
+}
+
+.zoomInOut {
+  animation: zoomOutFade .5s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+  .backButton {
+  position: fixed;
+  bottom: 2rem;   // distance from bottom
+  left: 2rem;     // distance from left
+  padding: 0.8rem 1.5rem;
+  font-size: 3rem;
+  background: #00e5ff00;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s;
+  z-index: 1000; // stays above other content
+
+  &:hover {
+    transform: scale(1.05);
+      text-shadow: 0 0 15px #fff, 0 0 30px rgb(209, 181, 207), 0 0 45px rgb(209, 192, 209);
+
+  }
+}
+
+
+
+.zoomInOut {
+  animation: zoomOutFade 0.6s ease forwards;
+}
+
+.zoomInFade {
+  animation: zoomInFade 0.6s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomInFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
