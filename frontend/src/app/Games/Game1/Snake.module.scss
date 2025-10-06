@@ -1,0 +1,232 @@
+.gameWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
+  color: #fff;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* Animated grid overlay (gaming vibes) */
+.gameWrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 70px 70px;
+  transform: translate(-50px, -50px) rotate(0deg);
+  animation: moveGrid 20s linear infinite;
+  z-index: 0;
+}
+
+@keyframes moveGrid {
+  from {
+    transform: translate(-50px, -50px) rotate(0deg);
+  }
+  to {
+    transform: translate(-50px, -50px) rotate(360deg);
+  }
+}
+
+/* Make sure game canvas + text stays above background */
+.canvasWrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+  margin-bottom: 20px;
+}
+
+.score {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #00ffcc;
+  text-shadow: 0 0 5px #00ffaa;
+}
+
+.canvas {
+  border: 3px solid #00ffcc;
+  box-shadow: 0 0 15px #00ffcc, 0 0 30px rgba(0, 255, 204, 0.4);
+  border-radius: 8px;
+}
+
+.container {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 800px; // match canvas
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 12px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.gameOver {
+  font-size: 3rem;
+  color: #ff3333;
+  text-shadow: 0 0 20px #ff0000, 0 0 40px #ff3333;
+  margin-bottom: 20px;
+  animation: pulse 1.5s infinite;
+}
+
+.finalScore {
+  font-size: 1.5rem;
+  color: #00ffcc;
+  text-shadow: 0 0 10px #00ffcc;
+  margin-bottom: 25px;
+}
+
+.restartButton {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  color: #fff;
+  background: linear-gradient(45deg, #00ffbf, #00d9ff);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(0, 255, 85, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgb(0, 255, 200);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333; }
+  50% { text-shadow: 0 0 20px #ff0000, 0 0 40px #ff3333; }
+  100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff3333; }
+}
+
+
+
+
+
+.fadeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.699); // full dark screen
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: 10;
+}
+
+.fadeActive {
+  opacity: 1; // full black when active
+}
+
+.zoomInOut {
+  animation: zoomOutFade .5s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.backButton {
+  position: fixed;
+  bottom: 2rem;   // distance from bottom
+  left: 2rem;     // distance from left
+  padding: 0.8rem 1.5rem;
+  font-size: 3rem;
+  background: #00e5ff00;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s;
+  z-index: 1000; // stays above other content
+
+  &:hover {
+    transform: scale(1.05);
+      text-shadow: 0 0 15px #fff, 0 0 30px rgb(209, 181, 207), 0 0 45px rgb(209, 192, 209);
+
+  }
+}
+
+.zoomInOut {
+  animation: zoomOutFade 0.6s ease forwards;
+}
+
+.zoomInFade {
+  animation: zoomInFade 0.6s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomInFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}

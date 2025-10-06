@@ -1,0 +1,213 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;  
+  overflow: hidden;
+  position: relative;
+  padding: 2rem;
+  user-select: none;
+
+  --bg-color: #000000; /* start color */
+  background: radial-gradient(circle at 80% 20%, #000000 , var(--bg-color) 100%);
+
+  animation: bgFadeIn 4s ease forwards;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent url("https://www.transparenttextures.com/patterns/stardust.png") repeat;
+    animation: moveStars 150s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  &::after {
+    animation: moveStars 300s linear infinite reverse;
+    opacity: 0.4;
+  }
+
+@property --bg-color {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #000000;
+}
+
+@keyframes bgFadeIn {
+  from {
+    --bg-color: #000000;
+  }
+  to {
+    --bg-color: #0e0157;
+  }
+}
+
+@keyframes moveStars {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -1000px;
+  }
+}
+}
+
+  .fadeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.699); // full dark screen
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: 10;
+}
+
+.fadeActive {
+  opacity: 1; // full black when active
+}
+
+.zoomInOut {
+  animation: zoomOutFade .5s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
+.backButton {
+  position: fixed;
+  bottom: 2rem;   // distance from bottom
+  left: 2rem;     // distance from left
+  padding: 0.8rem 1.5rem;
+  font-size: 3rem;
+  background: #00e5ff00;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.3s;
+  z-index: 1000; // stays above other content
+
+  &:hover {
+    transform: scale(1.05);
+      text-shadow: 0 0 15px #fff, 0 0 30px rgb(209, 181, 207), 0 0 45px rgb(209, 192, 209);
+
+  }
+}
+
+
+.zoomInOut {
+  animation: zoomOutFade 0.6s ease forwards;
+}
+
+.zoomInFade {
+  animation: zoomInFade 0.6s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomInFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+
+
+
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: white;
+}
+
+.gridContainer {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 200px;
+  height: 200px;
+  background: #111;
+  border: 2px solid #444;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.3s;
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    background: #222;
+    border-color: rgb(0, 153, 255);
+  }
+}
+
+.cardDisabled {
+  width: 200px;
+  height: 200px;
+  background: #222;
+  border: 2px dashed #555;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+  font-style: italic;
+}
