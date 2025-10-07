@@ -213,7 +213,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -221,7 +221,7 @@
 }
 
 .modalContent {
-  background: #6403684b;
+  background: #4d014e81;
   border-radius: 12px;
   padding: 2rem;
   max-width: 800px;
@@ -261,6 +261,25 @@
   cursor: pointer;
   color: #ffffff;
   transition: all 0.3s ease;
+}
+
+.modalCloseButton{
+  justify-content: center;
+  margin-top: 15px;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #ff006a, #d40083);
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.modalCloseButton:hover {
+  background: linear-gradient(135deg, #64032c, #fc5cbf);
+  color: #fff;
 }
 
 .modalContent h3 {
@@ -386,12 +405,12 @@
   }
 
   .projectCard {
-    width: 100%;
+    width: 130%;
     max-width: 280px;
   }
 
   .projectCard .cardImage {
-    height: 150px;
+    height: 100px;
     width: 100%;
     font-size: 1rem;
   }
@@ -400,6 +419,10 @@
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
   }
+
+  // .modalOverlay {
+  //   background-color: #000000;
+  // }
 
   .modalContent {
     padding: 1rem;

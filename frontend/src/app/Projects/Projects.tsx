@@ -60,14 +60,14 @@ const projects: Project[] = [
   {
     name: "Launchpad Reservation",
     description: "The ResV project, a seat reservation platform, aims to simplify the process of managing seat reservations for both administrators and customers. Built using a robust tech stack, including React for the user interface and Node.js with Express for the backend, ResV provides a responsive, reliable, and user-friendly experience..",
-    urls: [{ label: "Link", link: "https://res-v.vercel.app" }],
+    urls: [{ label: "Website Link", link: "https://res-v.vercel.app" }],
     images: [resv, resv1, resv2, resv3, resv4],
     techStack: ["React", "Node.js", "Express", "Mongodb", "Firebase"],
   },
   {
     name: "Valkyrie",
     description: "The Valkyrie is a 2d Role-playing and adventure game created from Unity where the character embarks on an adventure of battling all the enemies she encounters along the way. The character is named Lyra, a woman who lives in a tribe that has been invaded by enemies. Now, it’s time for her to take her revenge and save her home.",
-    urls: [{ label: "File", link: "https://drive.google.com/drive/folders/1eGeS_DXDEDwsFL36Q9OAUaHfzQXO-209?usp=sharing" }],
+    urls: [{ label: "File Link", link: "https://drive.google.com/drive/folders/1eGeS_DXDEDwsFL36Q9OAUaHfzQXO-209?usp=sharing" }],
     images: [valkyrie, valkyrie1, valkyrie2, valkyrie3, valkyrie4, valkyrie5],
     techStack: ["c#", "Unity", "2d" ],
   },
@@ -193,6 +193,8 @@ const Projects = () => {
               </a>
             ))}
             </div>
+            <button onClick={handleCloseModal} className={styles.modalCloseButton}>Close</button>
+
           </div>
         </div>
       )}
