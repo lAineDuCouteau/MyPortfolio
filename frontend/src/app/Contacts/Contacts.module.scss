@@ -233,3 +233,116 @@
     opacity: 0;
   }
 }
+
+
+
+
+/* --------------------------- */
+/* Responsive Adjustments */
+/* --------------------------- */
+
+@media (max-width: 1024px) {
+  .content {
+    gap: 5rem;
+    transform: scale(1);
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+
+  .image img {
+    width: 400px;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+    transform: scale(1);
+  }
+
+  .title {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .text {
+    font-size: 0.95rem;
+    max-width: 90%;
+    line-height: 1.6;
+  }
+
+  .contactList {
+    gap: 1.2rem;
+  }
+
+  .contactItem {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+
+    svg {
+      font-size: 1.3rem;
+    }
+  }
+
+  .image {
+    margin-bottom: -50px;
+
+    img {
+      width: 320px;
+      height: auto;
+    }
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    gap: 2rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .text {
+    font-size: 0.9rem;
+  }
+
+  .contactItem {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .image {
+    margin-bottom: 0;
+
+    img {
+      width: 230px;
+      height: auto;
+    }
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: 1rem;
+    left: 1rem;
+  }
+}

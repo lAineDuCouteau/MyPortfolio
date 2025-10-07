@@ -230,3 +230,114 @@ h2 {
     opacity: 0;
   }
 }
+
+
+
+
+
+/* ------------------ */
+/* RESPONSIVE STYLES */
+/* ------------------ */
+
+@media (max-width: 1024px) {
+  .about {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  .content {
+    gap: 3rem;
+  }
+
+  .image img {
+    width: 400px;
+    height: 600px;
+  }
+
+  .text {
+    font-size: 1.1rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .image {
+    order: 1;
+    margin-bottom: .1rem;
+
+    img {
+      width: 180px;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+
+  .text {
+    order: 2;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 90%;
+
+    h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    span {
+      color: #0ff;
+    }
+  }
+
+  .buttons {
+    order: 3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .btn {
+    margin: 0.4rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .image img {
+    width: 250px;
+  }
+
+  .text {
+    font-size: 0.9rem;
+
+    h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 80%;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+  }
+}

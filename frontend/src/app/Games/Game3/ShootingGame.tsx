@@ -202,6 +202,16 @@ const ShootingGame: React.FC = () => {
       <div className={`${styles.container} ${animate && !reverse ? styles.zoomInOut : ""} ${reverse ? styles.zoomInFade : ""}`}>
         <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} />
         <p className={styles.controls}>Use ← → to move, Space to shoot!</p>
+
+        {/* 🔹 Mobile Controls */}
+<div className={styles.mobileControls}>
+  <div className={styles.arrowRow}>
+    <button onClick={() => (jetXRef.current = Math.max(0, jetXRef.current - 20))}>⬅</button>
+    <button onClick={() => bulletsRef.current.push({ x: jetXRef.current, y: canvasHeight - 80, trail: [] })}>🔥</button>
+    <button onClick={() => (jetXRef.current = Math.min(canvasWidth - 50, jetXRef.current + 20))}>➡</button>
+  </div>
+</div>
+
         {gameOver && (
           <button
             className={styles.restartButton}

@@ -165,3 +165,151 @@ $neon-pink: #ffffff;
     opacity: 0;
   }
 }
+
+
+/* 🎮 Mobile Controls */
+.mobileControls {
+  display: none; // hidden by default on desktop
+  margin-top: 1.5rem;
+  z-index: 5;
+  position: relative;
+  text-align: center;
+
+  .arrowRow {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    button {
+      width: 60px;
+      height: 60px;
+      font-size: 1.8rem;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #ff3ca6;
+      border-radius: 50%;
+      text-shadow: 0 0 8px #ff3ca6;
+      box-shadow: 0 0 12px #ff3ca6, inset 0 0 10px rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      user-select: none;
+
+      &:active {
+        transform: scale(0.9);
+        box-shadow: 0 0 25px #ff3ca6, inset 0 0 15px #fff;
+      }
+    }
+  }
+}
+
+
+
+
+/* ============================= */
+/*  RESPONSIVE ADJUSTMENTS */
+/* ============================= */
+
+@media (max-width: 1024px) {
+  .mainContainer canvas {
+    width: 90%;
+    height: auto;
+  }
+
+  .controls {
+    font-size: 0.9rem;
+  }
+
+  .restartButton {
+    font-size: 0.9rem;
+    padding: 8px 18px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .mainContainer {
+    padding: 1.5rem;
+  }
+
+  .mainContainer canvas {
+    width: 95%;
+    height: auto;
+    border-width: 1.5px;
+  }
+
+  .controls {
+    font-size: 0.8rem;
+    margin-top: 8px;
+  }
+
+  .restartButton {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContainer canvas {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .controls {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .restartButton {
+    font-size: 0.8rem;
+    padding: 6px 14px;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
+
+
+
+/* 📱 Show controls only on smaller screens */
+@media (max-width: 768px) {
+  .mobileControls {
+    display: block;
+  }
+
+  .mainContainer canvas {
+    width: 90%;
+    height: auto;
+  }
+
+  .controls {
+    font-size: 0.85rem;
+  }
+
+  .restartButton {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .arrowRow button {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}

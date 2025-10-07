@@ -216,3 +216,108 @@
     border-color: rgb(0, 153, 255);
   }
 }
+
+
+
+/* --------------------------- */
+/* Responsive Adjustments */
+/* --------------------------- */
+
+@media (max-width: 1024px) {
+  .carouselWrapper {
+    height: 450px;
+  }
+
+  .card {
+    width: 340px;
+    height: 450px;
+
+    h2 {
+      font-size: 1.3rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+    }
+
+    .cardImage {
+      height: 250px;
+    }
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselWrapper {
+    height: 380px;
+  }
+
+  .card {
+    width: 280px;
+    height: 380px;
+
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
+
+    .cardImage {
+      height: 200px;
+    }
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .carouselWrapper {
+    height: 320px;
+  }
+
+  .card {
+    width: 220px;
+    height: 310px;
+    border-radius: 10px;
+
+    h2 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.75rem;
+    }
+
+    .cardImage {
+      height: 160px;
+    }
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}

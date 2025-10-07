@@ -230,3 +230,178 @@
     opacity: 0;
   }
 }
+
+
+/* Mobile arrow controls */
+.mobileControls {
+  display: none; /* hidden on desktop */
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 0.5rem;
+  z-index: 5;
+}
+
+.middleRow {
+  display: flex;
+  gap: 2rem;
+}
+
+.arrowBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  border: none;
+  background: radial-gradient(circle, #00ffcc, #0077ff);
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.6);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:active {
+    transform: scale(0.9);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+  }
+}
+
+
+
+
+/* --------------------------- */
+/* Responsive Adjustments */
+/* --------------------------- */
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .score {
+    font-size: 1rem;
+  }
+
+  .canvas {
+    width: 700px !important;
+    height: 500px !important;
+  }
+
+  .overlay {
+    width: 700px;
+    height: 500px;
+  }
+
+  .gameOver {
+    font-size: 2.5rem;
+  }
+
+  .finalScore {
+    font-size: 1.3rem;
+  }
+
+  .restartButton {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .score {
+    font-size: 0.95rem;
+  }
+
+  .canvas {
+    width: 500px !important;
+    height: 400px !important;
+  }
+
+  .overlay {
+    width: 500px;
+    height: 400px;
+  }
+
+  .gameOver {
+    font-size: 2rem;
+  }
+
+  .finalScore {
+    font-size: 1.1rem;
+  }
+
+  .restartButton {
+    font-size: 1rem;
+    padding: 8px 18px;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .score {
+    font-size: 0.9rem;
+  }
+
+  .canvas {
+    width: 300px !important;
+    height: 250px !important;
+  }
+
+  .overlay {
+    width: 300px;
+    height: 250px;
+  }
+
+  .gameOver {
+    font-size: 1.6rem;
+  }
+
+  .finalScore {
+    font-size: 1rem;
+  }
+
+  .restartButton {
+    font-size: 0.9rem;
+    padding: 6px 14px;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
+
+
+/* Show controls on small screens */
+@media (max-width: 768px) {
+  .mobileControls {
+    display: flex;
+  }
+
+  .canvas {
+    width: 90vw;
+    height: 60vw;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .score {
+    font-size: 1rem;
+  }
+}

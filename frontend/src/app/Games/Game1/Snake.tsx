@@ -142,6 +142,17 @@ const SnakeGame: React.FC = () => {
 
       <canvas ref={canvasRef} width={width} height={height} className={styles.canvas} />
 
+{/* Mobile Controls */}
+<div className={styles.mobileControls}>
+  <button onClick={() => setDir({ x: 0, y: -cellSize })} className={styles.arrowBtn}>&uarr;</button>
+  <div className={styles.middleRow}>
+    <button onClick={() => setDir({ x: -cellSize, y: 0 })} className={styles.arrowBtn}>&larr;</button>
+    <button onClick={() => setDir({ x: cellSize, y: 0 })} className={styles.arrowBtn}>&rarr;</button>
+  </div>
+  <button onClick={() => setDir({ x: 0, y: cellSize })} className={styles.arrowBtn}>&darr;</button>
+</div>
+
+
       {gameOver && (
   <div className={styles.overlay}>
     <h2 className={styles.gameOver}>Game Over</h2>

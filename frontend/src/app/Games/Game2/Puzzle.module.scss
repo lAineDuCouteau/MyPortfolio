@@ -223,3 +223,104 @@ $tile-shadow: 0 0 10px $neon-blue, 0 0 20px $neon-pink;
     opacity: 0;
   }
 }
+
+/* ============================= */
+/*  RESPONSIVE ADJUSTMENTS */
+/* ============================= */
+
+@media (max-width: 1024px) {
+  .container h1 {
+    font-size: 2.2rem;
+  }
+
+  .container p {
+    font-size: 1rem;
+  }
+
+  .button {
+    font-size: 0.9rem;
+    padding: 8px 20px;
+  }
+
+  .grid {
+    transform: scale(0.9);
+  }
+
+  .backButton {
+    font-size: 2.5rem;
+  }
+}
+
+/* Large phones and small tablets */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .container h1 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+
+  .container p {
+    font-size: 0.9rem;
+  }
+
+  .grid {
+    width: 90vw;
+    height: 90vw;
+    transform: scale(1);
+  }
+
+  .tile {
+    border-width: 1.5px;
+    box-shadow: 0 0 6px $neon-blue, 0 0 12px $neon-pink;
+  }
+
+  .solved {
+    font-size: 1.5rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  .container p {
+    font-size: 0.85rem;
+  }
+
+  .grid {
+    width: 95vw;
+    height: 95vw;
+    border-radius: 8px;
+  }
+
+  .tile {
+    border-width: 1px;
+    border-radius: 6px;
+    box-shadow: 0 0 4px $neon-blue, 0 0 10px $neon-pink;
+  }
+
+  .solved {
+    font-size: 1.2rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem;
+  }
+}
