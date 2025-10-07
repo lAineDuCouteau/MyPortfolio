@@ -312,3 +312,120 @@
   max-height: 300px;
   object-fit: contain;
 }
+
+
+
+/* 📱 Responsive Design */
+@media (max-width: 1024px) {
+  .projectsGrid {
+    gap: 3rem;
+    transform: scale(1);
+  }
+
+  .projectCard .cardImage {
+    height: 200px;
+    width: 320px;
+    font-size: 1.4rem;
+  }
+
+  .modalContent {
+    padding: 1.5rem;
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projectsGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .projectCard {
+    width: 80%;
+    max-width: 320px;
+  }
+
+  .projectCard .cardImage {
+    height: 180px;
+    width: 100%;
+    font-size: 1.2rem;
+  }
+
+  .modalContent {
+    width: 95%;
+    padding: 1.2rem;
+  }
+
+  .modalContent h2 {
+    font-size: 1.3rem;
+  }
+
+  .modalContent p {
+    font-size: 0.9rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsPage {
+    padding: 1.2rem;
+  }
+
+  .projectsGrid {
+    margin-top: 3rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .projectCard {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .projectCard .cardImage {
+    height: 150px;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .cardActions a {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .modalContent {
+    padding: 1rem;
+  }
+
+  .modalContent h2 {
+    font-size: 1.1rem;
+  }
+
+  .modalContent p {
+    font-size: 0.85rem;
+  }
+
+  .modalContent li {
+    font-size: 0.75rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem
+  }
+
+  .modalActions a, 
+.modalActions button {
+    padding: 0.4rem 1rem;
+
+}
+}

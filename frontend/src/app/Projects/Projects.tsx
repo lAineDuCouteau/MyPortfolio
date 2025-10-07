@@ -192,7 +192,6 @@ const Projects = () => {
                 {url.label}
               </a>
             ))}
-              <button onClick={handleCloseModal}>Close</button>
             </div>
           </div>
         </div>

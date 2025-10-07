@@ -271,3 +271,127 @@
   color: #e2275f;
   text-shadow: 0 0 8px rgba(253, 70, 147, 0.7);
 }
+
+
+/* ✅ Responsive adjustments */
+@media (max-width: 1200px) {
+  .albumGrid {
+    gap: 25px;
+    max-width: 800px;
+  }
+
+  .albumImageWrapper {
+    height: 300px;
+  }
+
+  .musicTitle {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .musicContainer {
+    padding: 1.5rem;
+  }
+
+  .albumGrid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+    max-width: 700px;
+  }
+
+  .albumImageWrapper {
+    height: 260px;
+  }
+
+  .albumTitle {
+    font-size: 0.95rem;
+  }
+
+  .playButton {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+
+  .musicTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .musicContainer {
+    padding: 1rem;
+  }
+
+  .musicTitle {
+    font-size: 1.8rem;
+  }
+
+  .albumGrid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    max-width: 90%;
+  }
+
+  .albumImageWrapper {
+    height: 220px;
+  }
+
+  .albumTitle {
+    font-size: 0.9rem;
+  }
+
+  .playButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem
+  }
+
+}
+
+@media (max-width: 480px) {
+  .musicContainer {
+    padding: 0.8rem;
+  }
+
+  .musicTitle {
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: .5rem;
+
+  }
+
+  .albumGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 100%;
+  }
+
+  .albumImageWrapper {
+    height: 200px;
+  }
+
+  .albumTitle {
+    font-size: 0.85rem;
+  }
+
+  .playButton {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem
+  }
+
+}

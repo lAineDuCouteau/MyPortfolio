@@ -146,13 +146,6 @@
   }
 }
 
-
-
-
-
-
-
-
 .title {
   font-size: 2.2rem;
   margin-bottom: 20px;
@@ -161,8 +154,6 @@
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
   animation: fadeInDown 0.8s ease forwards;
 }
-
-
 
 .hobbiesList {
   display: flex;
@@ -174,7 +165,6 @@
   opacity: 0;
   transform: scale(1.1);
 }
-
 
 .starButton {
   position: absolute;
@@ -212,8 +202,6 @@
   }
 }
 
-
-
 .hobbyImage {
   width: 100%;
   height: 400px;
@@ -237,4 +225,112 @@
   color: #f0f0f0;
   line-height: 1.5;
   opacity: 0.9;
+}
+
+
+
+/* ✅ Responsive adjustments */
+@media (max-width: 1200px) {
+  .hobbiesList {
+    gap: 3rem;
+  }
+
+  .hobbyCard {
+    width: 300px;
+  }
+
+  .hobbyImage {
+    height: 320px;
+  }
+}
+
+@media (max-width: 992px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .hobbiesList {
+    gap: 2.5rem;
+  }
+
+  .hobbyCard {
+    width: 260px;
+  }
+
+  .hobbyImage {
+    height: 280px;
+  }
+
+  .starButton {
+    font-size: 2.5rem;
+    top: -35px;
+    right: -30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hobbiesContainer {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .hobbiesList {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hobbyCard {
+    width: 90%;
+    max-width: 320px;
+  }
+
+  .hobbyImage {
+    height: 250px;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .hobbyCard {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hobbyImage {
+    height: 220px;
+  }
+
+  .hobbyTitle {
+    font-size: 1.1rem;
+  }
+
+  .hobbyDescription {
+    font-size: 0.85rem;
+  }
+
+  .starButton {
+    font-size: 2rem;
+    top: -30px;
+    right: -25px;
+  }
+
+  .backButton {
+    font-size: 2rem;
+    bottom: .5rem;
+    left: .5rem
+  }
 }
