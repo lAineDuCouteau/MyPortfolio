@@ -166,12 +166,11 @@ const Globe = () => {
   const buttonPositions = [
     [30, 30],
     [-30, 60],
-    [45, -45],
-    [-95, -55],
+    [65, -115],
+    [-65, 155],
     [-20, -40],
-    [15, 120],
+    [15, 150],
     [-15, -120],
-    [140, 30],
   ];
 
   const labels = [
@@ -182,7 +181,6 @@ const Globe = () => {
     "Hobbies",
     "Music",
     "About Me",
-    "Experience",
   ];
 
   const colors = [
@@ -193,7 +191,6 @@ const Globe = () => {
   "#f5b3df", 
   "#db7188", 
   "#92b5fa", 
-  "#9933ff", 
 ];
 
 

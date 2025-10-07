@@ -39,7 +39,7 @@ const Music: React.FC<MusicProps> = ({
   const handleBack = () => {
     setReverse(true);
     setTimeout(() => {
-      navigate(-1);
+    navigate("/globe");
     }, 600);
   };
 

@@ -99,7 +99,7 @@ const Projects = () => {
   const handleBack = () => {
     setReverse(true);
     setTimeout(() => {
-      navigate(-1);
+    navigate("/globe");
     }, 600);
   };
 
