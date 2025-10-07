@@ -7,6 +7,7 @@
   overflow: hidden;
   position: relative;
   padding: 2rem;
+  user-select: none;
 
   --bg-color: #000000; /* start color */
   background: radial-gradient(circle at 20% 20%, #1b2735 , var(--bg-color) 80%);

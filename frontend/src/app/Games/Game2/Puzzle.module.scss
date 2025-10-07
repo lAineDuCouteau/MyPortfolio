@@ -22,6 +22,7 @@ $tile-shadow: 0 0 10px $neon-blue, 0 0 20px $neon-pink;
   background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
   overflow: hidden;
   position: relative;
+  user-select: none;
 
   &::before {
     content: '';
