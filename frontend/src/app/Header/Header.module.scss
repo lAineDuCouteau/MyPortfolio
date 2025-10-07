@@ -27,3 +27,61 @@
     color: #0ff; // cyan on hover
   }
 }
+
+
+
+
+/* ------------------ */
+/* RESPONSIVE STYLES (row layout retained) */
+/* ------------------ */
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .nav a {
+    margin-left: 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+
+  .nav a {
+    margin-left: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .nav a {
+    font-size: 0.85rem;
+    margin-left: 0.6rem;
+  }
+}

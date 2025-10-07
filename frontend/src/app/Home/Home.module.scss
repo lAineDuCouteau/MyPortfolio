@@ -239,3 +239,87 @@ p {
     transform: scale(1.2) translateY(-5px);
   }
 }
+
+
+
+
+/* ------------------ */
+/* RESPONSIVE STYLES */
+/* ------------------ */
+
+@media (max-width: 1024px) {
+  .greeting {
+    font-size: 4rem;
+    margin-bottom: 70px;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  p {
+    font-size: 1.3rem;
+  }
+
+  .ctaButton {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .greeting {
+    font-size: 3rem;
+    margin-bottom: 50px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  .subText {
+    font-size: 1rem;
+  }
+
+  .ctaButton {
+    font-size: 2.5rem;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .greeting {
+    font-size: 2.3rem;
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .subText {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .ctaButton {
+    font-size: 2rem;
+  }
+
+  .footer {
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+}

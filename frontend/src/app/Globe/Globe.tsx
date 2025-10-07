@@ -98,6 +98,20 @@ const RotatingGlobe = ({
 }) => {
   const groupRef = useRef<THREE.Group>(null!);
   const [progress, setProgress] = useState(0);
+  const [baseScale, setBaseScale] = useState(2); // normal desktop scale
+
+  // ✅ Update scale depending on screen width
+  useEffect(() => {
+    const updateScale = () => {
+      if (window.innerWidth <= 480) setBaseScale(1); // mobile
+      else if (window.innerWidth <= 768) setBaseScale(1.5); // tablet
+      else setBaseScale(2); // desktop
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
@@ -105,7 +119,7 @@ const RotatingGlobe = ({
     // intro zoom-in (scale up)
     if (progress < 1 && !zoomingOut) {
       setProgress((p) => Math.min(1, p + delta * 1.4));
-      const s = THREE.MathUtils.lerp(1.5, 2, progress);
+      const s = THREE.MathUtils.lerp(baseScale * 0.75, baseScale, progress);
       groupRef.current.scale.set(s, s, s);
     }
 
@@ -122,25 +136,24 @@ const RotatingGlobe = ({
   return (
     <group ref={groupRef}>
       <mesh>
-  <sphereGeometry args={[2, 64, 64]} />
-  <meshStandardMaterial map={createGradientTexture()} />
-</mesh>
+        <sphereGeometry args={[2, 64, 64]} />
+        <meshStandardMaterial map={createGradientTexture()} />
+      </mesh>
 
-
-   {buttonPositions.map(([lat, lon]: number[], idx: number) => (
-  <ContinentButton
-    key={idx}
-    lat={lat}
-    lon={lon}
-    label={labels[idx]}
-    color={colors && colors[idx % colors.length]} // ✅ safe access
-    onButtonClick={onButtonClick}
-  />
-))}
-
+      {buttonPositions.map(([lat, lon]: number[], idx: number) => (
+        <ContinentButton
+          key={idx}
+          lat={lat}
+          lon={lon}
+          label={labels[idx]}
+          color={colors && colors[idx % colors.length]}
+          onButtonClick={onButtonClick}
+        />
+      ))}
     </group>
   );
 };
+
 
 
 // Animated Camera
