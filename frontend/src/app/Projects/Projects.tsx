@@ -48,7 +48,7 @@ const projects: Project[] = [
   {
     name: "DiscoverU",
     description:
-      "A web-based platform using OMR and real-time analytics to automate psychological assessments for Cavite State University – Bacoor City Campus, improving accuracy, speed, and counseling efficiency. This project have 3 level of access, the Student, Guidance(Admin), and Psychology(Super Admin).",
+      "A web-based platform using OMR and real-time analytics to automate psychological assessments for Cavite State University – Bacoor City Campus, improving accuracy, speed, and counseling efficiency. This project has 3 level of access, the Student, Guidance(Admin), and Psychology(Super Admin).",
     urls: [
       { label: "Student", link: "https://student-taupe-two.vercel.app" },
       { label: "Guidance", link: "https://guidance-ashen.vercel.app" },
