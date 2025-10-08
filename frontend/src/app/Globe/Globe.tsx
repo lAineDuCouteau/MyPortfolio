@@ -35,7 +35,21 @@ const createGradientTexture = () => {
 
 
 // Button
-const ContinentButton = ({ lat, lon, label, color, onButtonClick }: any) => {
+const ContinentButton = ({
+  lat,
+  lon,
+  label,
+  color,
+  onButtonClick,
+  camera,
+}: {
+  lat: number;
+  lon: number;
+  label: string;
+  color: string;
+  onButtonClick: (label: string) => void;
+  camera: THREE.Camera;
+}) => {
   const position = latLongToVector3(lat, lon, 1.93);
   const direction = new THREE.Vector3(...position).normalize();
   const quaternion = new THREE.Quaternion().setFromUnitVectors(
@@ -43,23 +57,26 @@ const ContinentButton = ({ lat, lon, label, color, onButtonClick }: any) => {
     direction
   );
 
-  const downRef = useRef(false);
+  const handleClick = () => {
+    // Vector from button to camera
+    const toCamera = new THREE.Vector3().subVectors(camera.position, new THREE.Vector3(...position)).normalize();
+
+    // Check if button's forward vector points toward camera
+    const dot = direction.dot(toCamera);
+
+    if (dot > 0.1) { // tweak threshold if needed
+      onButtonClick(label);
+    }
+  };
 
   return (
     <mesh
       position={position}
       quaternion={quaternion}
       scale={0.1}
-      onPointerDown={() => (downRef.current = true)}
-      onPointerUp={(e) => {
-        if (downRef.current) {
-          onButtonClick(label);
-          downRef.current = false;
-        }
-      }}
-      onPointerOut={() => (downRef.current = false)}
+      onClick={handleClick}
       onPointerOver={() => (document.body.style.cursor = "pointer")}
-      onLostPointerCapture={() => (document.body.style.cursor = "default")}
+      onPointerOut={() => (document.body.style.cursor = "default")}
     >
       <cylinderGeometry args={[6, 7, 1.5, 5]} />
       <meshStandardMaterial color={color} />
@@ -86,12 +103,14 @@ const RotatingGlobe = ({
   onButtonClick,
   zoomingOut,
   colors,
+  camera,
 }: {
   buttonPositions: number[][];
   labels: string[];
   onButtonClick: (label: string) => void;
   zoomingOut: boolean;
   colors: string[];
+  camera: THREE.Camera;
 }) => {
   const groupRef = useRef<THREE.Group>(null!);
   const [progress, setProgress] = useState(0);
@@ -145,6 +164,7 @@ const RotatingGlobe = ({
           label={labels[idx]}
           color={colors && colors[idx % colors.length]}
           onButtonClick={onButtonClick}
+          camera={groupRef.current?.parent?.children.find(child => child.type === 'PerspectiveCamera') as THREE.Camera}
         />
       ))}
     </group>
@@ -204,27 +224,21 @@ const Globe = () => {
 ];
 
 
-  const [navigating, setNavigating] = useState(false);
+  const handleButtonClick = (label: string) => {
+    setZoomingOut(true);
+    setFade(true); // trigger fade overlay
 
-const handleButtonClick = (label: string) => {
-  if (navigating) return; // prevent multiple navigations
-  setNavigating(true);
-  setZoomingOut(true);
-  setFade(true);
+    setTimeout(() => {
+      if (label === "Home") navigate("/");
+      else if (label === "About Me") navigate("/about");
+      else if (label === "Contacts") navigate("/contacts");
+      else if (label === "Projects") navigate("/projects");
+      else if (label === "Music") navigate("/music");
+      else if (label === "Hobbies") navigate("/hobbies");
+      else if (label === "Games") navigate("/games");
 
-  setTimeout(() => {
-    switch (label) {
-      case "Home": navigate("/"); break;
-      case "About Me": navigate("/about"); break;
-      case "Contacts": navigate("/contacts"); break;
-      case "Projects": navigate("/projects"); break;
-      case "Music": navigate("/music"); break;
-      case "Hobbies": navigate("/hobbies"); break;
-      case "Games": navigate("/games"); break;
-    }
-  }, 1500);
-};
-
+    }, 1500); // match zoom + fade duration
+  };
 
   return (
     <div className={styles.globeContainer}>
@@ -238,6 +252,7 @@ const handleButtonClick = (label: string) => {
   onButtonClick={handleButtonClick}
   zoomingOut={zoomingOut}
   colors={colors}   // 🔹 pass colors here
+  camera={new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000)} // dummy camera prop
 />
 
   <OrbitControls enableZoom={false} minPolarAngle={0} maxPolarAngle={Math.PI} />
