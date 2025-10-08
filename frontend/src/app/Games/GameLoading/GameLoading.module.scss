@@ -128,10 +128,13 @@
     border-width: 1.5px;
   }
 
-  p {
+  .loadingOverlay{
+    .p {
     font-size: 10px;
     letter-spacing: 1px;
   }
+  }
+
 
   .loaderContainer {
     gap: 0.5rem;
@@ -165,7 +168,9 @@
     border-width: 1px;
   }
 
-  p {
+  .loadingOverlay{
+    .p {
     font-size: 8px;
+  }
   }
 }
