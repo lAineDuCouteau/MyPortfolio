@@ -363,19 +363,19 @@
 
   .musicTitle {
     font-size: 1.5rem;
-    margin-top: 3rem;
-    margin-bottom: .5rem;
+    margin-top: 4rem;
+    margin-bottom: -.5rem;
 
   }
 
   .albumGrid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    max-width: 100%;
+    gap: 2.5rem;
+    max-width: 80%;
   }
 
   .albumImageWrapper {
-    height: 200px;
+    height: 250px;
   }
 
   .albumTitle {
