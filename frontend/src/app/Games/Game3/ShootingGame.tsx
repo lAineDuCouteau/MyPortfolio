@@ -204,31 +204,31 @@ const ShootingGame: React.FC = () => {
         <p className={styles.controls}>Use ← → to move, Space to shoot!</p>
 
         {/* 🔹 Mobile Controls */}
-<div className={styles.mobileControls}>
-<div className={styles.arrowRow}>
-  <button
-    onClick={() => {
-      if (!gameOver) jetXRef.current = Math.max(0, jetXRef.current - 20);
-    }}
-  >
-    ⬅
-  </button>
-  <button
-    onClick={() => {
-      if (!gameOver) bulletsRef.current.push({ x: jetXRef.current, y: canvasHeight - 80, trail: [] });
-    }}
-  >
-    🔥
-  </button>
-  <button
-    onClick={() => {
-      if (!gameOver) jetXRef.current = Math.min(canvasWidth - 50, jetXRef.current + 20);
-    }}
-  >
-    ➡
-  </button>
-</div>
-</div>
+          <div className={styles.mobileControls}>
+          <div className={styles.arrowRow}>
+            <button
+              onClick={() => {
+                if (!gameOver) jetXRef.current = Math.max(0, jetXRef.current - 20);
+              }}
+            >
+              ⬅
+            </button>
+            <button
+              onClick={() => {
+                if (!gameOver) bulletsRef.current.push({ x: jetXRef.current, y: canvasHeight - 80, trail: [] });
+              }}
+            >
+              🔥
+            </button>
+            <button
+              onClick={() => {
+                if (!gameOver) jetXRef.current = Math.min(canvasWidth - 50, jetXRef.current + 20);
+              }}
+            >
+              ➡
+            </button>
+          </div>
+          </div>
 
         {gameOver && (
           <button

@@ -229,13 +229,20 @@ $neon-pink: #ffffff;
 
 @media (max-width: 768px) {
   .mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   // horizontal centering
+    justify-content: center; // vertical centering
     padding: 1.5rem;
+    text-align: center; // ensures controls and canvas are aligned
   }
 
   .mainContainer canvas {
-    width: 95%;
+    width: 90%;
+    max-width: 400px;  // optional: prevents canvas from getting too big
     height: auto;
-    border-width: 1.5px;
+    display: block;    // removes inline spacing issues
+    margin: 0 auto;    // horizontal centering fallback
   }
 
   .controls {
@@ -257,8 +264,8 @@ $neon-pink: #ffffff;
 
 @media (max-width: 480px) {
   .mainContainer canvas {
-    width: 100%;
-    max-width: 380px;
+    width: 80%;
+    max-width: 350px;
   }
 
   .controls {

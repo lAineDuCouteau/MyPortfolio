@@ -18,6 +18,14 @@
   opacity: 0;
   animation: fadeIn 0.5s forwards;
   transition: opacity 0.5s ease;
+
+  p {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #00ffaa;
+  text-shadow: 0 0 6px #00ffaa, 0 0 12px #ff00ff;
+  margin: 0;
+}
 }
 
 .loaderContainer {
@@ -51,13 +59,7 @@
   transition: width 0.15s ease;
 }
 
-p {
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: #00ffaa;
-  text-shadow: 0 0 6px #00ffaa, 0 0 12px #ff00ff;
-  margin: 0;
-}
+
 
 /* Loader spin */
 @keyframes spin {
