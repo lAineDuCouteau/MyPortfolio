@@ -8,6 +8,12 @@
   overflow: hidden;
   position: relative;
   padding: 2rem;
+
+  -webkit-tap-highlight-color: transparent; /* iOS Safari */
+  outline: none; /* remove focus outline */
+  -webkit-user-select: none; /* prevent text selection on tap */
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 
   --bg-color: #000000; /* start color */

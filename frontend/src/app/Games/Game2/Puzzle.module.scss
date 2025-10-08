@@ -22,6 +22,12 @@ $tile-shadow: 0 0 10px $neon-blue, 0 0 20px $neon-pink;
   background: linear-gradient(135deg, #0a0a0a 0%, #111 100%);
   overflow: hidden;
   position: relative;
+
+  -webkit-tap-highlight-color: transparent; /* iOS Safari */
+  outline: none; /* remove focus outline */
+  -webkit-user-select: none; /* prevent text selection on tap */
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 
   &::before {

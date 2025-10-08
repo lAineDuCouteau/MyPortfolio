@@ -10,6 +10,12 @@
   left: 0;
   z-index: 1000; 
   color: white;
+
+  -webkit-tap-highlight-color: transparent; /* iOS Safari */
+  outline: none; /* remove focus outline */
+  -webkit-user-select: none; /* prevent text selection on tap */
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 

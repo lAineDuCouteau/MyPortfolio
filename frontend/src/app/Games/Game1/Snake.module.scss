@@ -11,6 +11,12 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
+
+  -webkit-tap-highlight-color: transparent; /* iOS Safari */
+  outline: none; /* remove focus outline */
+  -webkit-user-select: none; /* prevent text selection on tap */
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 

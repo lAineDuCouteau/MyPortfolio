@@ -8,6 +8,13 @@
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   overflow: hidden;
   position: relative;
+
+  
+  -webkit-tap-highlight-color: transparent; /* iOS Safari */
+  outline: none; /* remove focus outline */
+  -webkit-user-select: none; /* prevent text selection on tap */
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 
   &::before,
