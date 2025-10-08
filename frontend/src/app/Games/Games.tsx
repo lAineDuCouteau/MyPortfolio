@@ -5,6 +5,7 @@ import snakeImg from "../../assets/games/snake.png";
 import puzzleImg from "../../assets/games/puzzlebg.png";
 import shootingImg from "../../assets/games/shooting.png";
 import soonImg from "../../assets/games/soon.png";
+import GameLoading from "./GameLoading/GameLoading";
 
 
 const Games: React.FC = () => {
@@ -12,7 +13,7 @@ const Games: React.FC = () => {
   const [reverse, setReverse] = useState(false);
   const [angle, setAngle] = useState(0);
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false); // new state
   const requestRef = useRef<number | null>(null);
   const dragging = useRef(false);
   const lastX = useRef(0);
@@ -49,6 +50,21 @@ const Games: React.FC = () => {
     navigate("/globe");
     }, 600);
   };
+
+const handleGameClick = (path?: string) => {
+  if (!path) return;
+  setLoading(true);
+
+  // Wait for fade-in to complete before navigation
+  setTimeout(() => {
+    const loaderElement = document.querySelector(`.${styles.loadingOverlay}`);
+    if (loaderElement) loaderElement.classList.add(styles.fadeOut); // trigger fade-out
+
+    setTimeout(() => navigate(path), 500); // match fade-out duration
+  }, 1000); // small delay to let fade-in happen
+};
+
+
 
   // Dragging logic
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -109,27 +125,30 @@ const Games: React.FC = () => {
           onTouchEnd={handleTouchEnd}
         >
           <div className={styles.carousel} style={{ transform: `translateZ(-400px) rotateY(${angle}deg)` }}>
-  {games.map((game, index) => {
-    const rotation = (360 / games.length) * index; // auto-angle
-    return (
-      <div
-  key={game.name}
-  className={styles.card}
-  style={{ transform: `rotateY(${rotation}deg) translateZ(400px)` }}
-  onClick={() => {
-    if (game.path) navigate(game.path); // only navigate if path exists
-  }}
->
-  <img src={game.img} alt={game.name} className={styles.cardImage} />
-  <h2>{game.icon} {game.name}</h2>
-  <p>{game.desc}</p>
-</div>
+            {games.map((game, index) => {
+              const rotation = (360 / games.length) * index; // auto-angle
+              return (
+                <div
+            key={game.name}
+            className={styles.card}
+            style={{ transform: `rotateY(${rotation}deg) translateZ(400px)` }}
+            onClick={() => handleGameClick(game.path)}
 
-    );
-  })}
-</div>
+          >
+            <img src={game.img} alt={game.name} className={styles.cardImage} />
+            <h2>{game.icon} {game.name}</h2>
+            <p>{game.desc}</p>
+          </div>
+
+              );
+            })}
+          </div>
+
         </div>
+        
       </div>
+                {loading && <GameLoading />}
+
     </div>
   );
 };

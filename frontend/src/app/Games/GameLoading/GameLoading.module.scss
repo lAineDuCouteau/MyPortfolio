@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #090a0f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  overflow: hidden;
+  z-index: 9999;
+  font-family: "Press Start 2P", cursive;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  transition: opacity 0.5s ease;
+}
+
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #fff;
+  border-top: 6px solid #00ffaa;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loadingBar {
+  width: 300px;
+  height: 12px;
+  border: 2px solid #00ffaa;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #1b1b1b;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #00ffaa, #ff00ff);
+  transition: width 0.15s ease;
+}
+
+p {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #00ffaa;
+  text-shadow: 0 0 6px #00ffaa, 0 0 12px #ff00ff;
+  margin: 0;
+}
+
+/* Loader spin */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Stars background */
+.stars {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: transparent;
+  box-shadow:
+    50px 100px #fff,
+    150px 200px #fff,
+    250px 50px #fff,
+    400px 300px #fff,
+    600px 150px #fff,
+    800px 350px #fff,
+    900px 50px #fff;
+  animation: starMove 10s linear infinite;
+}
+
+@keyframes starMove {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-500px) translateX(-300px); }
+}
+
+/* Pixel particles effect */
+.particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.1) 0 1px,
+    transparent 1px 3px
+  );
+  animation: particlesMove 1s linear infinite;
+}
+
+@keyframes particlesMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}

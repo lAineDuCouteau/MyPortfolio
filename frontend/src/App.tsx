@@ -15,8 +15,6 @@ import Puzzle from "./app/Games/Game2/Puzzle";
 import ShootingGame from "./app/Games/Game3/ShootingGame";
 
 
-
-
 import './App.css';
 import sound1 from "./assets/mp3/sound1.mp3";
 
@@ -160,6 +158,7 @@ useEffect(() => {
         <Route path="/snake" element={<Snake />} />
         <Route path="/puzzle" element={<Puzzle />} />
         <Route path="/shooting" element={<ShootingGame />} />
+
 
 
         <Route
