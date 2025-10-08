@@ -102,7 +102,8 @@ const Home: React.FC<HomeProps> = ({ unmuteAudio }) => {
           >
             ❤️
           </span>{" "}
-          and a little stardust
+          and a little stardust. 
+          
         </p>
       </footer>
     </div>

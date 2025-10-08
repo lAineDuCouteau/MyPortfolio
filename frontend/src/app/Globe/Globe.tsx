@@ -35,19 +35,7 @@ const createGradientTexture = () => {
 
 
 // Button
-const ContinentButton = ({
-  lat,
-  lon,
-  label,
-  color,
-  onButtonClick,
-}: {
-  lat: number;
-  lon: number;
-  label: string;
-  color: string;
-  onButtonClick: (label: string) => void;
-}) => {
+const ContinentButton = ({ lat, lon, label, color, onButtonClick }: any) => {
   const position = latLongToVector3(lat, lon, 1.93);
   const direction = new THREE.Vector3(...position).normalize();
   const quaternion = new THREE.Quaternion().setFromUnitVectors(
@@ -55,17 +43,25 @@ const ContinentButton = ({
     direction
   );
 
+  const downRef = useRef(false);
+
   return (
     <mesh
       position={position}
       quaternion={quaternion}
       scale={0.1}
-      onClick={() => onButtonClick(label)}
+      onPointerDown={() => (downRef.current = true)}
+      onPointerUp={(e) => {
+        if (downRef.current) {
+          onButtonClick(label);
+          downRef.current = false;
+        }
+      }}
+      onPointerOut={() => (downRef.current = false)}
       onPointerOver={() => (document.body.style.cursor = "pointer")}
-      onPointerOut={() => (document.body.style.cursor = "default")}
+      onLostPointerCapture={() => (document.body.style.cursor = "default")}
     >
       <cylinderGeometry args={[6, 7, 1.5, 5]} />
-      {/* apply color dynamically */}
       <meshStandardMaterial color={color} />
       <Text
         position={[0, 0.8, 0]}
@@ -80,6 +76,7 @@ const ContinentButton = ({
     </mesh>
   );
 };
+
 
 
 
@@ -207,21 +204,27 @@ const Globe = () => {
 ];
 
 
-  const handleButtonClick = (label: string) => {
-    setZoomingOut(true);
-    setFade(true); // trigger fade overlay
+  const [navigating, setNavigating] = useState(false);
 
-    setTimeout(() => {
-      if (label === "Home") navigate("/");
-      else if (label === "About Me") navigate("/about");
-      else if (label === "Contacts") navigate("/contacts");
-      else if (label === "Projects") navigate("/projects");
-      else if (label === "Music") navigate("/music");
-      else if (label === "Hobbies") navigate("/hobbies");
-      else if (label === "Games") navigate("/games");
+const handleButtonClick = (label: string) => {
+  if (navigating) return; // prevent multiple navigations
+  setNavigating(true);
+  setZoomingOut(true);
+  setFade(true);
 
-    }, 1500); // match zoom + fade duration
-  };
+  setTimeout(() => {
+    switch (label) {
+      case "Home": navigate("/"); break;
+      case "About Me": navigate("/about"); break;
+      case "Contacts": navigate("/contacts"); break;
+      case "Projects": navigate("/projects"); break;
+      case "Music": navigate("/music"); break;
+      case "Hobbies": navigate("/hobbies"); break;
+      case "Games": navigate("/games"); break;
+    }
+  }, 1500);
+};
+
 
   return (
     <div className={styles.globeContainer}>
