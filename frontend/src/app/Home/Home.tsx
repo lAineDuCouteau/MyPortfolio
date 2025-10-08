@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Home.module.scss";
-import { Link } from "react-router-dom";
 
 const greetings = ["Hello", "Hola", "Bonjour", "Ciao", "こんにちは", "안녕하세요", "مرحبا", "Olá", "Hallo", "Привет"];
 
@@ -12,7 +12,11 @@ const Home: React.FC<HomeProps> = ({ unmuteAudio }) => {
   const [greetingIndex, setGreetingIndex] = useState(0);
   const [velvetGalaxy, setVelvetGalaxy] = useState(false);
   const [heartFlying, setHeartFlying] = useState(false);
+  const [twinkling, setTwinkling] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [introActive, setIntroActive] = useState(true);
   const heartRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,22 +25,42 @@ const Home: React.FC<HomeProps> = ({ unmuteAudio }) => {
     return () => clearInterval(interval);
   }, []);
 
+  // Trigger intro animation once when page loads
+  useEffect(() => {
+    const introTimer = setTimeout(() => setIntroActive(false), 3000);
+    return () => clearTimeout(introTimer);
+  }, []);
+
   const handleHeartClick = () => {
-  setHeartFlying(true);
+    setHeartFlying(true);
+    setTimeout(() => {
+      setVelvetGalaxy((prev) => !prev);
+      setHeartFlying(false);
+    }, 2000);
+  };
 
-  setTimeout(() => {
-    setVelvetGalaxy((prev) => !prev); // toggle on/off
-    setHeartFlying(false); // stop fly & zoom
-  }, 2000); // duration of fly & zoom
-};
-
+  const handleStar = () => {
+    unmuteAudio();
+    setTwinkling(true);
+    setFadeOut(true); // start cosmic fade
+    setTimeout(() => {
+      navigate("/globe");
+    }, 3400);
+  };
 
   return (
-<div className={styles.home}>
-  {/* Velvet galaxy overlay */}
-  <div className={`${styles.velvetOverlay} ${velvetGalaxy ? styles.active : ""}`}></div>
-  
-        <header className={styles.header}>
+    <div
+      className={`${styles.home} ${fadeOut ? styles.cosmicFade : ""} ${
+        introActive ? styles.intro : ""
+      }`}
+    >
+      <div className={`${styles.velvetOverlay} ${velvetGalaxy ? styles.active : ""}`}></div>
+
+      <header
+        className={`${styles.header} ${
+          fadeOut ? styles.textFade : introActive ? styles.textIntro : ""
+        }`}
+      >
         <div className={styles.greetingContainer}>
           <div className={styles.greeting}>{greetings[greetingIndex]}!</div>
         </div>
@@ -52,27 +76,23 @@ const Home: React.FC<HomeProps> = ({ unmuteAudio }) => {
           code I’ve created.
         </p>
 
-        <Link to="/globe" onClick={unmuteAudio}>
-  <button className={styles.ctaButton}>
-    ˙⋆🌟⋆˙
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-    <span className={styles.sparkle}></span>
-  </button>
-</Link>
-
-
+        <button
+          className={`${styles.ctaButton} ${twinkling ? styles.twinkle : ""}`}
+          onClick={handleStar}
+          disabled={twinkling}
+        >
+          ˙⋆🌟⋆˙
+          {Array.from({ length: 11 }).map((_, i) => (
+            <span key={i} className={styles.sparkle}></span>
+          ))}
+        </button>
       </header>
 
-      <footer className={styles.footer}>
+      <footer
+        className={`${styles.footer} ${
+          fadeOut ? styles.textFade : introActive ? styles.textIntroFooter : ""
+        }`}
+      >
         <p>
           Made with{" "}
           <span
@@ -84,7 +104,6 @@ const Home: React.FC<HomeProps> = ({ unmuteAudio }) => {
           </span>{" "}
           and a little stardust
         </p>
-        
       </footer>
     </div>
   );

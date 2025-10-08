@@ -127,6 +127,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .greetingContainer {
@@ -240,7 +241,332 @@ p {
   }
 }
 
+/* --- TWINKLE BURST EFFECT --- */
+.twinkle {
+  animation: twinkleBurst 1.5s ease-in-out forwards !important;
+  pointer-events: none;
+}
 
+@keyframes twinkleBurst {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 15px #fff, 0 0 30px #0ff, 0 0 45px #0ff;
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.4);
+    text-shadow: 0 0 40px #fff, 0 0 80px #0ff, 0 0 120px #fff;
+  }
+  70% {
+    transform: scale(1.8);
+    text-shadow: 0 0 25px #fff, 0 0 50px #0ff;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* --- COSMIC GLOW WITH RADIAL SHIMMER RIPPLE --- */
+.cosmicFade {
+  position: relative;
+  overflow: hidden;
+  animation: cosmicFadeOut 2.8s ease-in-out 1s forwards; /* delay for star */
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 255, 255, 0.25),
+      rgba(0, 100, 255, 0.4),
+      rgba(0, 0, 60, 0.85) 75%
+    );
+    opacity: 0;
+    transform: scale(0.8);
+    animation:
+      cosmicGlowPulse 2.8s ease-in-out 1s forwards,
+      shimmerRipple 2.8s ease-in-out 1s forwards;
+    z-index: 10;
+    pointer-events: none;
+  }
+}
+
+/* Pulse expands and fades smoothly to deep black */
+@keyframes cosmicGlowPulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 255, 255, 0.15),
+      rgba(0, 120, 255, 0.3),
+      rgba(0, 0, 30, 0.8) 70%
+    );
+    filter: blur(0px);
+  }
+
+  30% {
+    opacity: 0.9;
+    transform: scale(1.3);
+    background: radial-gradient(
+      circle at center,
+      rgba(100, 255, 255, 0.6),
+      rgba(0, 180, 255, 0.5),
+      rgba(0, 0, 40, 0.9) 75%
+    );
+    filter: blur(6px);
+  }
+
+  60% {
+    opacity: 0.8;
+    transform: scale(1.1);
+    background: radial-gradient(
+      circle at center,
+      rgba(60, 200, 255, 0.4),
+      rgba(0, 100, 255, 0.3),
+      rgba(0, 0, 40, 0.9) 80%
+    );
+    filter: blur(4px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(2);
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 1) 90%
+    );
+    filter: blur(12px);
+  }
+}
+
+/* 🌊 Radial shimmer ripple expands outward from center */
+@keyframes shimmerRipple {
+  0% {
+    mask-image: radial-gradient(circle at center, white 0%, transparent 0%);
+    -webkit-mask-image: radial-gradient(circle at center, white 0%, transparent 0%);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  25% {
+    mask-image: radial-gradient(circle at center, white 8%, transparent 25%);
+    -webkit-mask-image: radial-gradient(circle at center, white 8%, transparent 25%);
+    filter: brightness(1.15) hue-rotate(8deg);
+  }
+  50% {
+    mask-image: radial-gradient(circle at center, white 25%, transparent 55%);
+    -webkit-mask-image: radial-gradient(circle at center, white 25%, transparent 55%);
+    filter: brightness(1.25) hue-rotate(15deg);
+  }
+  75% {
+    mask-image: radial-gradient(circle at center, white 45%, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, white 45%, transparent 80%);
+    filter: brightness(1.1) hue-rotate(8deg);
+  }
+  100% {
+    mask-image: radial-gradient(circle at center, white 100%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at center, white 100%, transparent 100%);
+    filter: brightness(0.7) hue-rotate(0deg);
+  }
+}
+
+/* Fade page content softly */
+@keyframes cosmicFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* --- TEXT COSMIC FADE TRANSITION --- */
+.textFade {
+  animation: textFadeOut 1.8s ease-in-out 0.6s forwards; /* slight delay after twinkle */
+  transition: opacity 0.4s ease;
+}
+
+@keyframes textFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+  40% {
+    opacity: 0.8;
+    transform: translateY(-5px);
+    filter: blur(1px);
+  }
+  80% {
+    opacity: 0.3;
+    transform: translateY(-25px);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px);
+    filter: blur(5px);
+  }
+}
+
+@keyframes textPulseBeforeFade {
+  0% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }
+  20% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1.02);
+    text-shadow: 0 0 12px rgba(180, 100, 255, 0.4),
+                 0 0 25px rgba(150, 80, 255, 0.3);
+  }
+  60% {
+    opacity: 0.7;
+    filter: blur(1px);
+    transform: scale(0.98);
+    text-shadow: 0 0 15px rgba(150, 80, 255, 0.2);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: scale(1.05);
+    text-shadow: none;
+  }
+}
+
+.textFade {
+  animation: textPulseBeforeFade 3.2s ease-in-out forwards;
+}
+
+.cosmicFade {
+  animation: cosmicGlowPulseFade 3.5s ease-in-out forwards;
+}
+
+
+
+  .fadeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.699); // full dark screen
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease;
+  z-index: 10;
+}
+
+.fadeActive {
+  opacity: 1; // full black when active
+}
+
+.zoomInOut {
+  animation: zoomOutFade 0.6s ease forwards;
+}
+
+.zoomInFade {
+  animation: zoomInFade 0.6s ease forwards;
+}
+
+@keyframes zoomOutFade {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomInFade {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+
+.intro {
+  opacity: 0;
+  animation: fadeInGlow 3s ease-out forwards;
+}
+
+@keyframes fadeInGlow {
+  0% {
+    opacity: 0;
+    box-shadow: 0 0 0px rgba(180, 120, 255, 0);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 0 0 60px rgba(200, 150, 255, 0.4);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0px rgba(180, 120, 255, 0);
+  }
+}
+
+
+/* Text entrance animations: start invisible, fade in slowly */
+.textIntro {
+  opacity: 0;
+  animation: textFadeIn 2.2s ease-out forwards;
+}
+
+.textIntroFooter {
+  opacity: 0;
+  animation: textFadeInFooter 2.5s ease-out 0.5s forwards;
+}
+
+/* Header text fades in from below */
+@keyframes textFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  30% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  70% {
+    opacity: 0.7;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer fades in slower with delay */
+@keyframes textFadeInFooter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
 /* ------------------ */
