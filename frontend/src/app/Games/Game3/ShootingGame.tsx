@@ -173,7 +173,7 @@ const ShootingGame: React.FC = () => {
   // Controls
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (!gameOver) {
+      if (!gameOver) {  
         if (e.key === "ArrowLeft") jetXRef.current = Math.max(0, jetXRef.current - 20);
         if (e.key === "ArrowRight") jetXRef.current = Math.min(canvasWidth - 50, jetXRef.current + 20);
         if (e.key === " ") bulletsRef.current.push({ x: jetXRef.current, y: canvasHeight - 80, trail: [] });
@@ -205,11 +205,29 @@ const ShootingGame: React.FC = () => {
 
         {/* 🔹 Mobile Controls */}
 <div className={styles.mobileControls}>
-  <div className={styles.arrowRow}>
-    <button onClick={() => (jetXRef.current = Math.max(0, jetXRef.current - 20))}>⬅</button>
-    <button onClick={() => bulletsRef.current.push({ x: jetXRef.current, y: canvasHeight - 80, trail: [] })}>🔥</button>
-    <button onClick={() => (jetXRef.current = Math.min(canvasWidth - 50, jetXRef.current + 20))}>➡</button>
-  </div>
+<div className={styles.arrowRow}>
+  <button
+    onClick={() => {
+      if (!gameOver) jetXRef.current = Math.max(0, jetXRef.current - 20);
+    }}
+  >
+    ⬅
+  </button>
+  <button
+    onClick={() => {
+      if (!gameOver) bulletsRef.current.push({ x: jetXRef.current, y: canvasHeight - 80, trail: [] });
+    }}
+  >
+    🔥
+  </button>
+  <button
+    onClick={() => {
+      if (!gameOver) jetXRef.current = Math.min(canvasWidth - 50, jetXRef.current + 20);
+    }}
+  >
+    ➡
+  </button>
+</div>
 </div>
 
         {gameOver && (

@@ -109,3 +109,61 @@ p {
   0% { background-position: 0 0; }
   100% { background-position: 0 100%; }
 }
+
+
+
+/* Mobile & tablet responsiveness */
+@media (max-width: 768px) {
+  .loader {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+
+  .loadingBar {
+    width: 200px;
+    height: 10px;
+    border-width: 1.5px;
+  }
+
+  p {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .loaderContainer {
+    gap: 0.5rem;
+  }
+
+  .stars {
+    width: 300%;
+    height: 300%;
+    box-shadow:
+      30px 60px #fff,
+      90px 120px #fff,
+      150px 30px #fff,
+      240px 180px #fff,
+      360px 90px #fff,
+      480px 210px #fff,
+      540px 30px #fff;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .loader {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+  }
+
+  .loadingBar {
+    width: 150px;
+    height: 8px;
+    border-width: 1px;
+  }
+
+  p {
+    font-size: 8px;
+  }
+}
